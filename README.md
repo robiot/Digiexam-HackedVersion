@@ -8,15 +8,16 @@ It allows you to:
  - Run digiexam in a virtual machine
  - Run a exam that has lockdown enabled without locking down the computer
 
-How do you download?:
 
-Easy:
+## How do you download?:
+
+### Easy:
 1. Download [Latest](https://github.com/robiot/Digiexam-HackedVersion/releases/latest)
 2. Extract the zip file
 3. Open DigiExam.exe
 
-\
-Latest:
+
+### Latest:
 1. Dowload [This](https://github.com/robiot/Digiexam-HackedVersion/raw/main/app.asar)
 2. Go to your digiexam installation directory "%LocalAppData%\DigiExam". And then into the latest version, ex (app-13.0.3).
     (You need to have it downloaded from their website as ms store downloads into a protected directory)
