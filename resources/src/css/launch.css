@@ -1,0 +1,38 @@
+@font-face {
+	font-family: "Titillium Web";
+	src: url("font/TitilliumWeb-Regular.ttf") format("truetype");
+}
+
+body {
+	background-image: url(../images/launch-bg.png);
+	margin: 0;
+	height: 450px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	user-select: none;
+	-webkit-app-region: drag;
+}
+
+.logo {
+	width: 400px;
+	margin-top: 110px;
+	margin-bottom: 24px;
+}
+
+.spinner {
+	margin-bottom: 13px;
+}
+
+.statusText {
+	font-family: "Titillium Web";
+	font-size: 20px;
+	margin: 0;
+	cursor: default;
+}
+
+.cracked {
+	position: fixed;
+	bottom: 0;
+	right: 1;
+}

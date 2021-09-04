@@ -1,0 +1,15 @@
+<div ng-if="vm.inputSwitchSupported">
+	<div ng-show="vm.inputLanguages.length > 0">
+		<select ng-model="vm.selectedInputLanguageKey" ng-change="vm.setActiveLanguage(vm.selectedInputLanguageKey)" class="select">
+			<option ng-repeat="lang in vm.inputLanguages" value="{{lang.key}}">{{lang.name}}</option>
+		</select>
+	</div>
+	<div ng-show="vm.inputLanguages.length === 0">
+		<span>{{"Settings.KeyboardLanguage.Error" | i18n}}</span>
+	</div>
+</div>
+<div ng-if="!vm.inputSwitchSupported">
+	<span ng-if="vm.isOpenBookExam">{{"Settings.KeyboardLanguage.InfoChromeAndroid.OpenBook" | i18n}}</span>
+	<span ng-if="!vm.isOpenBookExam && vm.isAndroid">{{"Settings.KeyboardLanguage.InfoAndroid.Lockdown" | i18n}}</span>
+	<span ng-if="!vm.isOpenBookExam && !vm.isAndroid">{{"Settings.KeyboardLanguage.InfoChrome.Lockdown" | i18n}}</span>
+</div>

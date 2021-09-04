@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<!--
+	Sample icons file. This file looks like an SVG file with groups as its
+	children. Each group element has an ID that must match the ID of the button given
+	in the extension. The SVG inside the group makes up the actual icon, and
+	needs use a viewBox instead of width/height for it to scale	properly.
+
+	Multiple icons can be included, each within their own group.
+-->
+	<g id="view_grid">
+		<svg viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<g fill-rule="nonzero" fill="#333333">
+								<g transform="translate(14.000000, 15.000000)">
+										<g transform="translate(15.574193, 14.932918) rotate(-90.000000) translate(-15.574193, -14.932918) translate(4.574193, -0.067082)">
+												<polygon points="-1.31694445e-16 0.837525768 4.64761353e-16 29.6906447 2 29.6906447 2 0.837525768"></polygon>
+												<polygon points="10 0.837525768 10 29.6906447 12 29.6906447 12 0.837525768"></polygon>
+												<polygon points="20 0.837525768 20 29.6906447 22 29.6906447 22 0.837525768"></polygon>
+										</g>
+										<g id="Group-6" transform="translate(4.742604, 0.625452)">
+												<polygon points="-2.48065715e-17 -0.162474232 6.90940386e-16 28.6906447 2 28.6906447 2 -0.162474232"></polygon>
+												<polygon points="10 -0.162474232 10 28.6906447 12 28.6906447 12 -0.162474232"></polygon>
+												<polygon points="20 -0.162474232 20 28.6906447 22 28.6906447 22 -0.162474232"></polygon>
+										</g>
+								</g>
+						</g>
+				</g>
+		</svg>
+	</g>
+</svg>

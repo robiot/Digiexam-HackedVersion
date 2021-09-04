@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+
+	h1 {
+		font-family: sans-serif;
+	}
+
+	p {
+		margin-left: 20px;
+		font-size: 20px;
+		font-family: sans-serif;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		min-height: 100%;
+	}
+
+	.container_item {
+		display:  flex;
+		align-items: center;
+		max-width: 444px;
+		margin-bottom: 5px;
+	}
+</style>
+
+<html lang="en">
+	<head>
+		<script type="text/javascript">
+			window.onload = function setStrings() {
+				"use strict";
+				var args = new URLSearchParams(window.location.search);
+				var lang = args.get("lang");
+
+				var notConnected = {
+					en: "You are not connected to the Internet",
+					sv: "Du är inte ansluten till internet"
+				};
+				var needConnection = {
+					en: "You need an active Internet connection to view this link.",
+					sv: "Du behöver ha en aktiv internetuppkoppling för att kunna visa länken."
+				};
+				var informInstructor = {
+					en: "Inform your instructor that you are having problems with your Internet connection.",
+					sv: "Informera en ansvarig om att du har stött på problem med din internetuppkoppling."
+				};
+
+				document.getElementById("notConnected").innerText = notConnected[lang];
+				document.getElementById("needConnection").innerHTML = needConnection[lang];
+				document.getElementById("informInstructor").innerHTML = informInstructor[lang];
+			};
+		</script>
+		<meta charset="UTF-8"/>
+		<title>No Internet</title>
+	</head>
+	<body>
+		<div id="container" class="container">
+			<div>
+				<h1><span id="notConnected"></span></h1>
+			</div>
+			<div class="container_item">
+				<img src="../../images/onlineResources-no-internet-connection-icon.svg"/>
+				<div>
+					<p><span id="needConnection"></span></p>
+				</div>
+			</div>
+			<div class="container_item">
+				<img src="../../images/onlineResources_Inform_instructor_illustration.svg"/>
+				<div class="horizontalFormRow_field">
+					<p class="ptag"><span id="informInstructor"></span></p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

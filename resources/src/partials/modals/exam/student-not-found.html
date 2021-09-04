@@ -1,0 +1,31 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 class="h1">{{"Overview.Errors.StudentNotFound.Title" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<ul class="pl-400">
+			<li class="mb">{{"Overview.Errors.StudentNotFound.Text1" | i18n}}
+				<p><strong>{{"Overview.Errors.StudentNotFound.Text1.CurrentEmail" | i18n}}</strong>: {{user.email}} (<a href ng-click="openUserEdit()">{{"Overview.Errors.StudentNotFound.Edit" | i18n}}</a>)</p>
+			</li>
+			<li>{{"Overview.Errors.StudentNotFound.Text2" | i18n}}</li>
+			<ol class="mt-300 pl-400">
+				<li class="mb-200">{{"Overview.Errors.StudentNotFound.Text2.Step1" | i18n}}
+					(<a href ng-click="openUserEdit()">{{"Overview.Errors.StudentNotFound.Edit" | i18n}}</a>)
+				</li>
+				<li class="mb-200">{{"Overview.Errors.StudentNotFound.Text2.Step2" | i18n}}</li>
+				<li class="mb-200">{{"Overview.Errors.StudentNotFound.Text2.Step3" | i18n}}</li>
+			</ol>
+		</ul>
+
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				dx-dialog-autofocus
+				ng-click="close()"
+				dx-button="default">
+				{{"Overview.Errors.Close" | i18n}}
+		</button>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 ng-if="dxeFiles.length > 1" class="h1 mh-500">{{dxeFiles.length}} exams found</h1>
+		<h1 ng-if="dxeFiles.length === 1" class="h1 mh-500">Exam found</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			<ul class="examlist">
+				<li ng-repeat="dxe in dxeFiles"
+					ng-click="$parent.selectedDXE = dxe"
+					ng-class="$parent.selectedDXE === dxe ? 'selected' : 'default'">
+					<a>{{::dxe.examList[0].title}}</a>
+
+					<div class="examlist_details">
+						{{"Overview.ExamID" | i18n}}: {{::dxe.examList[0].id}}
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				dx-dialog-autofocus
+				ng-click="close()"
+				dx-button="default"
+				class="ml">
+			Close
+		</button>
+		<button
+				dx-dialog-autofocus
+				ng-disabled="!selectedDXE"
+				ng-click="startExam(selectedDXE)"
+				dx-button="cta"
+				class="ml">
+			Start exam
+		</button>
+	</div>
+</div>

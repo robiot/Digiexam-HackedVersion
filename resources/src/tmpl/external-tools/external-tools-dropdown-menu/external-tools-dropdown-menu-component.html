@@ -1,0 +1,43 @@
+<div ng-if="vm.useDropdown" class="dropdown dropdown_container textLeft">
+	<div
+			title="{{'Overview.ExamDetails.ExternalTools.Heading' | i18n}}"
+			class="iconButton dropdown_icon"
+			ng-click="vm.onDropdownClick($event)"
+			ng-class="vm.openDropdown ? 'externalToolButton-active open' : vm.openedExternalTool ? 'externalToolButton-active active' : 'closed'">
+		<img
+				ng-if="vm.isIOS || (vm.openedExternalTool && !vm.openDropdown)"
+				src="images/icon_external_tools_close.svg"
+				alt="{{'TopMenu.ExternalTools.Exit' | i18n}}"/>
+		<img
+				ng-if="!vm.isIOS && !vm.openDropdown && !vm.openedExternalTool"
+				src="images/icon_external_tools_down.svg"
+				alt="{{'TopMenu.ExternalTools.Open' | i18n}}"/>
+		<img
+				ng-if="!vm.isIOS && vm.openDropdown && !vm.openedExternalTool"
+				src="images/icon_external_tools_up.svg"
+				alt="{{'TopMenu.ExternalTools.Close' | i18n}}"/>
+	</div>
+
+	<ul class="dropdown_menu" ng-class="{'dropdown_menu-show': vm.openDropdown}">
+		<li ng-repeat="tool in vm.externalTools" >
+			<a ng-click="vm.onToolClick(tool)" class="externalToolDropDownItemContainer">
+				<dx-external-tool-dropdown-item
+						icon="tool.logo"
+						name="tool.title">
+				</dx-external-tool-dropdown-item>
+			</a>
+		</li>
+	</ul>
+
+</div>
+<div ng-if="!vm.useDropdown" class="display-flex">
+	<dx-external-tool-button
+			ng-repeat="tool in vm.externalTools"
+			icon="tool.logo"
+			is-active="tool.id === vm.openedExternalTool"
+			small="true"
+			name="tool.title"
+			ng-click="vm.onToolClick(tool)"
+			disabled="vm.isIOS">
+	</dx-external-tool-button>
+</div>

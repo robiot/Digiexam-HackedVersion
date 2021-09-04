@@ -1,0 +1,22 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1>{{"RemoteSessionDetected.Title" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			<img class="mb" src="images/insert-usb.svg" />
+			<p>{{"RemoteSessionDetected.Text0" | i18n}}</p>
+			<br />
+			<p>{{"RemoteSessionDetected.Text1" | i18n}}</p>
+			<br />
+			<p>{{"RemoteSessionDetected.Text2" | i18n}}<strong>{{time | date:"HH:mm"}}</strong></p>
+		</div>
+	</div>
+
+	<div ng-if="errorMessage" class="dialog_footer">
+		<div>
+			<p class="colorError textCenter">{{"RemoteSessionDetected.Error" | i18n}}</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,26 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1>{{"AccessibilitySettings.AccessibilitySettings" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			<p>
+				{{message}}
+			</p>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button dx-button="default"
+			ng-click="close()"
+			class="ml">
+			{{"Settings.Cancel" | i18n}}
+		</button>
+		<button dx-button="cta"
+			ng-click="tryAgain()"
+			class="ml">
+			{{"Settings.TryAgain" | i18n}}
+		</button>
+	</div>
+</div>

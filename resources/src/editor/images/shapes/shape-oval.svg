@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-oval</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Drawing-tool" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-oval" fill-rule="nonzero" fill="#333333">
+            <path d="M30,45 C38.2842712,45 45,38.2842712 45,30 C45,21.7157288 38.2842712,15 30,15 C21.7157288,15 15,21.7157288 15,30 C15,38.2842712 21.7157288,45 30,45 Z M30,47 C20.6111593,47 13,39.3888407 13,30 C13,20.6111593 20.6111593,13 30,13 C39.3888407,13 47,20.6111593 47,30 C47,39.3888407 39.3888407,47 30,47 Z" id="Oval-7"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,23 @@
+<div class="dialog dialog-higherPosition client_settings_dialog">
+	<div class="dialog_header">
+		<h1>{{"Settings.Settings" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="grid_container m-500">
+			<div class="text-bold textRight pr">
+				{{"Language.Title" | i18n}}
+			</div>
+			<dx-toggle-button-group
+					[(selected-value)]="selectedLanguage"
+					(selected-value-change)="onChangeLanguage()"
+					[alternatives]="languageOptions"></dx-toggle-button-group>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button	dx-button="default" ng-click="close()">
+			{{"Settings.Close" | i18n}}
+		</button>
+	</div>
+</div>

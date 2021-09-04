@@ -1,0 +1,47 @@
+<div class="dialog">
+    <div class="dialog_header">
+        <h1 class="h1 mh-500">{{"StartExamOffline.InternetNeeded.Title" | i18n}}</h1>
+    </div>
+    <div class="dialog_body">
+        <div ng-show="onlineResources" class="m-500">
+            <div class="horizontalFormRow">
+                <img class="mb icon-50" src="images/onlineResources-contains-web-links.svg" />
+                <div class="horizontalFormRow_field">
+                    {{"StartExamOffline.InternetNeeded.Text0" | i18n}}
+                </div>
+            </div>
+        </div>
+        <div ng-show="immersiveReader" class="m-500">
+            <div class="horizontalFormRow">
+                <img class="mb icon-50" src="images/icon_immersive_reader.svg" />
+                <div class="horizontalFormRow_field">
+                    {{"StartExamOffline.InternetNeeded.Text1" | i18n}}
+                </div>
+            </div>
+        </div>
+        <div class="m-500">
+            <div class="horizontalFormRow">
+                <img class="mb icon-50" src="images/onlineResources-no-internet-connection-icon.svg" />
+                <div class="horizontalFormRow_field">
+                    {{"StartExamOffline.InternetNeeded.Text2" | i18n}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog_footer">
+        <button
+                dx-dialog-autofocus
+                ng-click="close()"
+                dx-button="default"
+                class="ml">
+            {{"StartExamOffline.InternetNeeded.Cancel" | i18n}}
+        </button>
+        <button
+                dx-dialog-autofocus
+                ng-click="startExam()"
+                dx-button="warning"
+                class="ml">
+            {{"StartExamOffline.InternetNeeded.StartExam" | i18n}}
+        </button>
+    </div>
+</div>

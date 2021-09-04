@@ -1,0 +1,154 @@
+<div class="topMenu appDraggable">
+	<div ng-if="vm.platform !== vm.DX_CLIENT_TYPE.IOS" class="topMenu_statusBar">
+		<div class="topMenu_item topMenu_item-leftAlign pl-300"></div>
+		<div class="topMenu_item topMenu_item-fullWidth"><dx-clock></dx-clock></div>
+		<div class="topMenu_item topMenu_item-rightAlign pr-300"><dx-battery-indicator></dx-battery-indicator></div>
+	</div>
+
+	<div class="topMenu_mainBar">
+		<div class="topMenu_item topMenu_item-leftAlign pl-300">
+			<div class="topMenu_item-leftAlign-buttons" ng-if="!vm.drawingEditorIsActive">
+				<dx-accessibility-settings ng-show="vm.user != null" exam="vm.exam"></dx-accessibility-settings>
+				<span
+						ng-if="vm.dxTextToSpeech.isEnabled()"
+						class="display-inline-block appNoDraggable">
+					<button
+							title="{{vm.textToSpeechActive ? 'Speak' : 'Stop'}}"
+							ng-click="vm.toggleTextToSpeech()"
+							ng-class="{'textToSpeechIcon-animated': vm.textToSpeechActive}"
+							dx-prevent-selection-loss
+							class="iconButton textToSpeechIcon textToSpeechIcon-topMenu">
+						<ng-include src="'images/textToSpeech_icon_speaking.svg'"></ng-include>
+					</button>
+				</span>
+				<dx-external-tools-dropdown-menu
+						ng-if="vm.exam && vm.exam.externalTools && vm.windowSize"
+						class="appNoDraggable" 
+						window-size="vm.windowSize"
+						external-tools="vm.exam.externalTools">
+				</dx-external-tools-dropdown-menu>
+			</div>
+			<div
+					ng-class="{	'ml': vm.windowSize === vm.DX_WINDOW_SIZE.LARGE.name,
+								'ml-300': vm.windowSize !== vm.DX_WINDOW_SIZE.LARGE.name,
+								'appNoDraggable': !vm.exam }"
+					class="display-inline-block">
+				<span ng-show="vm.user">
+					<b>{{vm.user.firstName}} {{vm.user.lastName}}<span ng-if="vm.user.code">{{" - " + vm.user.code}}</span></b><br/>
+					{{vm.user.email}}
+				</span>
+			</div>
+		</div>
+		<div class="topMenu_item topMenu_item-centerAlign">
+			<span ng-if="vm.windowSize === vm.DX_WINDOW_SIZE.LARGE.name">
+				<div
+						ng-if="vm.dxDuration.isEnabled()"
+						ng-show="vm.exam != null"
+						class="display-inline-block appNoDraggable">
+					<button
+							dx-button="border-default"
+							ng-click="vm.toggleTimer()"
+							ng-mousedown="vm.deselectOnMouseUp($event)">
+						<img src="images/icon-timer.svg" class="topMenu_timerIcon" />
+						<span ng-show="!vm.timerShow && vm.windowSize !== vm.DX_WINDOW_SIZE.SMALL.name">
+							{{"TopMenu.ShowTimer" | i18n}}
+						</span>
+						<span ng-show="vm.timerShow">
+							{{vm.dxDuration.getTimeLeft() ? (vm.dxDuration.getTimeLeft() | dxReadableTime) : ("Overview.ExamDetails.TimeIsUp" | i18n)}}
+						</span>
+					</button>
+				</div>
+			</span>
+		</div>
+
+		<div class="topMenu_item topMenu_item-rightAlign pr-300">
+			<div ng-if="vm.windowSize !== vm.DX_WINDOW_SIZE.LARGE.name" class="mr-300">
+				<div
+						ng-if="vm.dxDuration.isEnabled()"
+						ng-show="vm.exam != null"
+						class="display-inline-block appNoDraggable">
+					<button
+							dx-button="border-default"
+							ng-click="vm.toggleTimer()"
+							ng-mousedown="vm.deselectOnMouseUp($event)">
+						<img src="images/icon-timer.svg" class="topMenu_timerIcon" />
+						<span ng-show="!vm.timerShow && vm.windowSize !== vm.DX_WINDOW_SIZE.SMALL.name">
+							{{"TopMenu.ShowTimer" | i18n}}
+						</span>
+						<span ng-show="vm.timerShow">
+							{{vm.dxDuration.getTimeLeft() ? (vm.dxDuration.getTimeLeft() | dxReadableTime) : ("Overview.ExamDetails.TimeIsUp" | i18n)}}
+						</span>
+					</button>
+				</div>
+			</div>
+			<div
+					class="display-contents"
+					ng-class="{'ml-300': vm.windowSize !== vm.DX_WINDOW_SIZE.LARGE.name}">
+				<img
+						ng-if="vm.activeExam.isLockedQuestionSequence()"
+						src="images/icon_lock_bg_black.svg"
+						class="lockIcon"/>
+				<div
+						ng-show="vm.exam != null && !vm.drawingEditorIsActive"
+						class="display-inline-block topMenu_progressText"
+						ng-class="{	'topMenu_progressText-start': vm.answeredCount === 0,
+									'topMenu_progressText-done': vm.answeredCount === vm.questionCount,
+									'ml-200': vm.activeExam.isLockedQuestionSequence()}">
+					<span class="display-inline-block topMenu_progressText-large">
+						{{vm.answeredCount}}/{{vm.questionCount}}
+					</span>
+					<span ng-if="vm.windowSize !== vm.DX_WINDOW_SIZE.SMALL.name" class="display-inline-block">
+						{{"TopMenu.QuestionsAnswered0" | i18n}}<br />{{"TopMenu.QuestionsAnswered1" | i18n}}
+					</span>
+				</div>
+			</div>
+			<span
+					ng-show="vm.exam != null && !vm.drawingEditorIsActive"
+					class="appNoDraggable"
+					ng-class="vm.windowSize === vm.DX_WINDOW_SIZE.LARGE.name ? 'ml' : 'ml-300'">
+				<button
+						ng-attr-dx-button="{{vm.answeredCount == vm.questionCount ? 'cta' : 'default'}}"
+						ng-click="vm.handIn()"
+						ng-disabled="vm.handInDisabled">
+					{{"TopMenu.Button.HandIn" | i18n}}
+				</button>
+			</span>
+
+			<span
+					ng-if="vm.exam == null && vm.user"
+					class="appNoDraggable"
+					ng-class="vm.windowSize === vm.DX_WINDOW_SIZE.LARGE.name ? 'ml' : 'ml-300'">
+				<button dx-button="default" ng-click="vm.signOut()">{{"LogIn.LogOut" | i18n}}</button>
+			</span>
+	
+			<span
+					ng-if="vm.platform === vm.DX_CLIENT_TYPE.CHROMEBOOK"
+					ng-show="vm.exam == null"
+					class="appNoDraggable"
+					ng-class="vm.windowSize === vm.DX_WINDOW_SIZE.LARGE.name ? 'ml' : 'ml-300'">
+				<button dx-button="default" ng-click="vm.exit()">{{"TopMenu.Button.Exit" | i18n}}</button>
+			</span>
+		</div>
+	</div>
+
+	<div ng-if="vm.dxPresentationMode.allowed()" class="topMenu_statusBar topMenu_presentationModeNotice">
+		<div class="topMenu_item topMenu_item-fullWidth">{{"TopMenu.PresentationMode" | i18n}}</div>
+	</div>
+	<div ng-if="vm.exam.isDemo" class="topMenu_statusBar topMenu_demoNotice">
+		<div class="topMenu_item topMenu_item-fullWidth">{{"TopMenu.DemoExam" | i18n}}</div>
+	</div>
+
+	<button
+			ng-if="vm.dxTextToSpeech.isEnabled() && !vm.drawingEditorIsActive && vm.platform === vm.DX_CLIENT_TYPE.IOS"
+			ng-click="vm.toggleTextToSpeech()"
+			title="{{vm.textToSpeechActive ? 'Speak' : 'Stop'}}"
+			ng-show="vm.showTtsBall"
+			dx-on-global-text-select="vm.showTtsBall = true;"
+			dx-on-global-text-deselect="vm.showTtsBall = false;"
+			ng-class="{'textToSpeechIcon-animated': vm.textToSpeechActive}"
+			dx-prevent-selection-loss
+			class="textToSpeechBall"
+			id="ttsBall">
+		<ng-include src="'images/textToSpeech_icon_speaking.svg'" class="textToSpeechIcon textToSpeechIcon-ball"></ng-include>
+	</button>
+</div>

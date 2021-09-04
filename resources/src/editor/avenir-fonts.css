@@ -1,0 +1,30 @@
+/* @license
+ * MyFonts Webfont Build ID 2470122, 2013-02-05T04:01:23-0500
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: Avenir 55 Roman by Linotype
+ * URL: http://www.myfonts.com/fonts/linotype/avenir/55-roman/
+ *
+ * Webfont: Avenir 35 Light by Linotype
+ * URL: http://www.myfonts.com/fonts/linotype/avenir/35-light/
+ *
+ * Webfont: Avenir 85 Heavy by Linotype
+ * URL: http://www.myfonts.com/fonts/linotype/avenir/85-heavy/
+ *
+ *
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2470122
+ * Webfonts copyright: Part of the digitally encoded machine readable outline data for producing the Typefaces provided is copyrighted &#x00A9; 1981 - 2007 Linotype GmbH, www.linotype.com. All rights reserved. This software is the property of Linotype GmbH, and may not be repro
+ *
+ * © 2013 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@font-face {font-family: 'AvenirLT-Roman';src: url('fonts/avenir/25B0EA_0_0.eot');src: url('fonts/avenir/25B0EA_0_0.eot?#iefix') format('embedded-opentype'),url('fonts/avenir/25B0EA_0_0.woff') format('woff'),url('fonts/avenir/25B0EA_0_0.ttf') format('truetype'),url('fonts/avenir/25B0EA_0_0.svg#wf') format('svg');}
+@font-face {font-family: 'AvenirLT-Light';src: url('fonts/avenir/25B0EA_1_0.eot');src: url('fonts/avenir/25B0EA_1_0.eot?#iefix') format('embedded-opentype'),url('fonts/avenir/25B0EA_1_0.woff') format('woff'),url('fonts/avenir/25B0EA_1_0.ttf') format('truetype'),url('fonts/avenir/25B0EA_1_0.svg#wf') format('svg');}
+@font-face {font-family: 'AvenirLT-Heavy';src: url('fonts/avenir/25B0EA_2_0.eot');src: url('fonts/avenir/25B0EA_2_0.eot?#iefix') format('embedded-opentype'),url('fonts/avenir/25B0EA_2_0.woff') format('woff'),url('fonts/avenir/25B0EA_2_0.ttf') format('truetype'),url('fonts/avenir/25B0EA_2_0.svg#wf') format('svg');}

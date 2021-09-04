@@ -1,0 +1,26 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1>You have left DigiExam</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			<p class="mb-300">You have accidentally or intentionally left the DigiExam client. This action has caused the DigiExam client to lock down.</p>
+			<p class="mb-300">You left the DigiExam client at: <strong>{{time | date:"HH:mm"}}</strong></p>
+			<hr class="mv-500" />
+			<p class="mb-300">Ask your instructor to insert a USB drive with the offline exam file into your computer to unlock the client.</p>
+			<p class="text-bold mb-300">OR</p>
+			<p class="mb-300">Ask your instructor to unlock your exam in the monitor view, then press the Unlock Exam button to unlock the client.</p>
+			<button dx-button="cta"
+				ng-click="requestUnlockRemote()">
+				Unlock Exam
+			</button>
+		</div>
+	</div>
+
+	<div ng-if="errorMessage" class="dialog_footer">
+		<div>
+			<p class="colorError textCenter">{{errorMessage}}</p>
+		</div>
+	</div>
+</div>

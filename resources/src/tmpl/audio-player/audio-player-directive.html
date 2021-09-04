@@ -1,0 +1,119 @@
+<div class="audioPlayer">
+	<button
+			class="audioPlayer_button"
+			ng-if="vm.dxDetectPlatform() !== 'CHROME_APP'"
+			ng-disabled="!vm.indexOfCurrentFile"
+			ng-click="vm.previousTrack()">
+		<img src="./images/audio_player_previous_icon.svg" />
+	</button>
+
+	<button
+			class="audioPlayer_button"
+			ng-show="!vm.isPlaying"
+			ng-click="vm.start()">
+		<img src="./images/audio_player_play_icon.svg" />
+	</button>
+	<button
+			class="audioPlayer_button"
+			ng-show="vm.isPlaying"
+			ng-click="vm.pause()">
+		<img src="./images/audio_player_pause_icon.svg" />
+	</button>
+
+	<button
+			class="audioPlayer_button"
+			ng-if="vm.dxDetectPlatform() !== 'CHROME_APP'"
+			ng-disabled="vm.indexOfCurrentFile === vm.audioFiles.length - 1"
+			ng-click="vm.nextTrack()">
+		<img src="./images/audio_player_next_icon.svg" />
+	</button>
+	<div class="audioPlayer_showFiles">
+		<input 
+			hidden 
+			id="audio-android-input"
+			type="file"
+			accept="audio/*"
+		/>
+		<button
+				class="audioPlayer_button ml-1000"
+				ng-click="vm.getAudioFiles()"
+				ng-show="!vm.isListFilesOpen">
+			<img src="./images/audio_player_list_idle_icon.svg" />
+		</button>
+
+		<button
+				class="audioPlayer_button ml-1000"
+				ng-click="vm.getAudioFiles()"
+				ng-show="vm.isListFilesOpen">
+			<img src="./images/audio_player_list_active_icon.svg" />
+		</button>
+
+		<div class="audioPlayer_list-container" ng-show="vm.isListFilesOpen">
+			<div class="audioPlayer_list-container_audio-list overflow-y-auto" flex="100">
+				<div class="audioPlayer_list-container_audio-list_no-files p-400" ng-show="vm.audioFiles.length == 0" >
+					<p>{{"AudioPlayer.List.NoFiles" | i18n}}</p>
+				</div>
+
+				<ul ng-show="vm.audioFiles.length != 0">
+					<div class="audioPlayer_list-container_audio-list_item-container"
+					     ng-repeat="file in vm.audioFiles"
+					     ng-click="vm.selectFile(file.filePath)"
+					     ng-class="vm.currentFilePath === file.filePath ? 'selected' : 'default'"
+					     ng-attr-title="{{file.fileName}}">
+						<div class="audioPlayer_list-container_audio-list_item-container_trackName">
+							<li>
+								{{file.fileName}}
+							</li>
+						</div>
+						<div class="audioPlayer_list-container_audio-list_item-container_trackDuration">
+							<li>
+								{{file.duration}}
+							</li>
+						</div>
+					</div>
+				</ul>
+			</div>
+			<div class="audioPlayer_list-container_arrow">
+			</div>
+		</div>
+	</div>
+
+	<p class="audioPlayer_time ml-700"> {{vm.currentTime}}</p>
+	<div class="audioPlayer_flexWrapper ml-300">
+		<p>{{vm.currentFileName}}</p>
+		<dx-slider
+				id="dxAudioPlayer_durationSlider"
+				marker="vm.audio.currentTime"
+				on-change="vm.onDurationSliderChange"
+				color-of-slider="dxAudioPlayer_durationSlider"
+				min="0"
+				max="vm.audioPlayerDurationMax"
+				step="1"
+				options="{style: 'flex', darkMode: true}">
+		</dx-slider>
+	</div>
+	<p class="audioPlayer_time"> {{vm.durationLength}}</p>
+
+	<button
+			class="audioPlayer_button ml-1000"
+			ng-show="!vm.isMuted"
+			ng-click="vm.setMute()">
+		<img src="./images/audio_player_volume_icon.svg"/>
+	</button>
+	<button
+			class="audioPlayer_button ml-1000"
+			ng-show="vm.isMuted"
+			ng-click="vm.setUnMute()">
+		<img src="./images/audio_player_mute_icon.svg"/>
+	</button>
+
+	<dx-slider
+			id="dxAudioPlayer_volumeSlider"
+			marker="vm.audioPlayerVolumeMarker"
+			on-change="vm.setVolume"
+			min="0"
+			max="1"
+			step="0.01"
+			options="{style: 'short', darkMode: true}">
+	</dx-slider>
+</div>

@@ -1,0 +1,330 @@
+<html>
+	<head>
+		<title>DigiExam audio player</title>
+		<meta charset="UTF-8"/>
+		<style>
+			html, body {
+				height: 100%;
+				margin: 0;
+				background: rgb(242, 242, 242);
+				font: 16px/1.42857 "Helvetica Neue",Helvetica,Arial,sans-serif;
+			}
+
+			.container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 100%;
+			}
+
+			.audioPlayer {
+				display: flex;
+				flex: 1;
+				margin-left: 35px;
+				margin-right: 35px;
+				padding-left: 30px;
+				padding-right: 30px;
+				background: white;
+				height: 110px;
+			}
+
+			.audioPlayer_button {
+				width: 50px;
+				height: 50px;
+				margin-right: 10px;
+				margin-top: 30px;
+
+				cursor: pointer;
+				border-radius: 5px;
+				text-decoration: none;
+				-webkit-transition: background-color .1s;
+				-webkit-appearance: none;
+				display: inline-block;
+				padding: 5px 10px;
+				background: 0 0;
+				border: 1px solid transparent;
+				outline: 3px solid rgba(26, 162, 230, 0);
+				outline-offset: 1px;
+			}
+
+			.audioPlayer_button:hover {
+				background-color: #D9D9D9;
+			}
+
+			.audioPlayer_button:active {
+				background-color: #BFBFBF;
+			}
+
+			.audioPlayer_slider:focus {
+				outline:0;
+			}
+
+			.audioPlayer_slider-short {
+				width: 160px;
+			}
+
+			.audioPlayer_slider-long {
+				width: 100%;
+				margin-right: 15px;
+			}
+
+			.audioPlayer_slider {
+				margin-top: 52px;
+			}
+
+			.audioPlayer_flexWrapper {
+				flex: 1;
+				margin-right: 15px;
+			}
+
+			.audioPlayer_time {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+			}
+
+			.audioPlayer_mute {
+				margin-left: 30px;
+			}
+
+			.audioPlayer_volume {
+				margin-left: 30px;
+			}
+
+			input[type='range'],
+			input[type='range']::-webkit-slider-runnable-track,
+			input[type='range']::-webkit-slider-thumb {
+				-webkit-appearance: none;
+			}
+
+			input[type=range]::-webkit-slider-thumb {
+				height: 30px;
+				width: 30px;
+				background: #bfbfbf;
+				border-radius: 50%;
+				border: 0;
+				box-shadow: 0px 2px 8px #000000;
+			}
+
+			input[type='range'] {
+				height: 6px;
+				background: #f2f2f2;
+				border: 1px solid;
+				border-color: #dddddd;
+			}
+
+			.displayNone {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="audioPlayer">
+				<button	class="audioPlayer_play audioPlayer_button">
+					<img src="../../images/onlineResources_icon_audioplayer_play.svg" />
+				</button>
+				<button
+						class="audioPlayer_pause audioPlayer_button displayNone">
+					<img src="../../images/onlineResources_icon_audioplayer_pause.svg" />
+				</button>
+
+				<div class="audioPlayer_flexWrapper">
+				<input
+						type="range"
+						class="audioPlayer_duration audioPlayer_slider audioPlayer_slider-long" />
+				</div>
+
+				<span class="audioPlayer_time">??:?? / ??:??</span>
+
+				<button	class="audioPlayer_volume audioPlayer_button">
+					<img src="../../images/onlineResources_icon_audioplayer_volume.svg" />
+				</button>
+				<button
+						class="audioPlayer_mute audioPlayer_button displayNone">
+					<img src="../../images/onlineResources_icon_audioplayer_mute.svg" />
+				</button>
+				<input
+						type="range"
+						class="audioPlayer_volumeSlider audioPlayer_slider audioPlayer_slider-short"
+						min="0"
+						max="1"
+						step="0.01" />
+			</div>
+		</div>
+
+		<script>
+			var audioPlayer = (function audioPlayer() {
+				var audio = new Audio();
+				var changingDurationInProgress = false;
+				var clientPlatform;
+
+				// DOM elements
+				var play = document.getElementsByClassName("audioPlayer_play")[0];
+				var pause = document.getElementsByClassName("audioPlayer_pause")[0];
+				var volume = document.getElementsByClassName("audioPlayer_volume")[0];
+				var mute = document.getElementsByClassName("audioPlayer_mute")[0];
+				var durationSlider = document.getElementsByClassName("audioPlayer_duration")[0];
+				var volumeSlider = document.getElementsByClassName("audioPlayer_volumeSlider")[0];
+				var time = document.getElementsByClassName("audioPlayer_time")[0];
+
+				play.addEventListener("click", function(event) {
+					audio.play().then(function () {
+						hideElement(play);
+						showElement(pause);
+					});
+				});
+
+				pause.addEventListener("click", function() {
+					audio.pause();
+					showElement(play);
+					hideElement(pause);
+				});
+
+				volume.addEventListener("click", function() {
+					setVolume(0);
+				});
+
+				mute.addEventListener("click", function() {
+					setVolume(0.3);
+				});
+
+				volumeSlider.addEventListener("input", function() {
+					setVolume(volumeSlider.value);
+				});
+
+				audio.addEventListener("timeupdate",function (){
+					if (isNaN(audio.duration)) {
+						return;
+					}
+
+					if (!changingDurationInProgress) {
+						durationSlider.value = parseInt(audio.currentTime, 10);
+						styleSliderAmount(durationSlider, audio.currentTime, audio.duration);
+					}
+
+					time.innerHTML = formatSecToString(audio.currentTime) + " / " + formatSecToString(audio.duration);
+				});
+
+				audio.addEventListener("ended",function (){
+					showElement(play);
+					hideElement(pause);
+					audio.currentTime = 0;
+					durationSlider.value = 0;
+					styleSliderAmount(durationSlider, audio.currentTime, audio.duration);
+
+					time.innerHTML = formatSecToString(audio.currentTime) + " / " + formatSecToString(audio.duration);
+				});
+
+				audio.addEventListener("loadedmetadata", function() {
+					durationSlider.max = Math.floor(parseInt(audio.duration));
+					styleSliderAmount(durationSlider, audio.currentTime, audio.duration);
+					time.innerHTML = formatSecToString(audio.currentTime) + " / " + formatSecToString(audio.duration);
+				});
+
+				function onFailedLoad() {
+					switch (clientPlatform) {
+						case "ios":
+							setupWebViewJavascriptBridge(function(bridge) {
+								bridge.callHandler("load_failed");
+							});
+							break;
+
+						case "electron":
+							window.ipcRenderer.sendToHost("load_failed");
+							break;
+
+						case "chrome":
+							chrome.runtime.sendMessage({channel: "load_failed"});
+							break;
+					}
+				}
+
+				audio.addEventListener("abort", onFailedLoad);
+				audio.addEventListener("error", onFailedLoad);
+				audio.addEventListener("stalled", onFailedLoad);
+
+				durationSlider.addEventListener("input", function() {
+					audio.currentTime = durationSlider.value;
+					time.innerHTML = formatSecToString(audio.currentTime) + " / " + formatSecToString(audio.duration);
+				});
+
+				durationSlider.addEventListener("mousedown", function() {
+					changingDurationInProgress = true;
+				});
+
+				durationSlider.addEventListener("mouseup", function() {
+					changingDurationInProgress = false;
+					styleSliderAmount(durationSlider, audio.currentTime, audio.duration);
+				});
+
+				function setUrl(url, platform) {
+					clientPlatform = platform;
+					audio.src = url;
+					durationSlider.value = 0;
+					setVolume(0.3);
+					audio.load();
+				}
+
+				function setVolume(vol) {
+					audio.volume = vol;
+					volumeSlider.value = vol;
+					styleSliderAmount(volumeSlider, vol, 1);
+
+					if (vol === 0) {
+						hideElement(volume);
+						showElement(mute);
+					} else {
+						showElement(volume);
+						hideElement(mute);
+					}
+				}
+
+				function removeVolumeControls() {
+					hideElement(volume);
+					hideElement(volumeSlider);
+				}
+
+				function hideElement(el) {
+					el.classList.add("displayNone");
+				}
+
+				function showElement(el) {
+					el.classList.remove("displayNone");
+				}
+
+				function formatSecToString(time) {
+					var min = Math.floor(time / 60);
+					var sec = Math.floor(time % 60);
+					var formattedMin = (min < 10 ? "0" + min : min);
+					var formattedSec = (sec < 10 ? "0" + sec : sec);
+					return formattedMin + ":" + formattedSec;
+				}
+
+				function styleSliderAmount(slider, current, max) {
+					var range = current / max;
+					slider.style = "background: -webkit-gradient(linear, left top, right top, color-stop(" +
+						range +
+						", #979797), color-stop(" +
+						range +
+						", #f2f2f2))";
+				}
+
+				return {
+					setUrl: setUrl,
+					removeVolumeControls: removeVolumeControls,
+				};
+			}());
+
+			// Listen for custom event from the host.
+			document.getElementsByTagName('body')[0].addEventListener("audio", function(e) {
+				audioPlayer.setUrl(e.detail.src, e.detail.platform);
+
+				if (e.detail.platform === "ios") {
+					audioPlayer.removeVolumeControls();
+				}
+			});
+		</script>
+	</body>
+</html>

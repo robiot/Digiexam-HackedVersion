@@ -1,0 +1,587 @@
+body {
+	background-color: #f2f2f2 !important;
+}
+
+/*
+	Toolbars
+*/
+#sidepanels {
+	display: none;
+}
+
+#main_icon {
+	display: none;
+}
+
+#svg_editor #tools_top {
+	left: 0;
+	top: 0;
+	height: 60px;
+	border-bottom: 1px solid #aaa;
+}
+
+#tools_top > div {
+	height: 50px;
+	margin: 5px 0;
+	line-height: 50px;
+}
+
+#svg_editor #tools_left {
+	width: 60px !important;
+	top: 62px !important;
+	bottom: 0;
+	left: 0;
+	background-color: transparent;
+	box-sizing: border-box;
+	padding: 5px 5px;
+	border-right: 1px solid #aaa;
+}
+
+#svg_editor #tools_left > * {
+	-webkit-transform: initial;
+	-moz-transform: initial;
+	transform: initial;
+}
+
+#editor_panel > * {
+	-webkit-transform: initial !important;
+	-moz-transform: initial !important;
+	transform: initial !important;
+}
+
+#history_panel {
+	float: right;
+	margin-right: 5px !important;
+}
+
+#history_panel > * {
+	-webkit-transform: initial !important;
+	-moz-transform: initial !important;
+	transform: initial !important;
+}
+
+#tools_left .tools_sep {
+	height: 1px;
+	background: #aaa;
+	width: 50px;
+	margin: 10px 0;
+}
+
+#dx-tool-options {
+	height: 50px;
+	position: absolute;
+	margin: 0 !important;
+	left: 22px;
+	top: 5px;
+	bottom: 5px;
+	display: flex;
+	justify-content: center;
+}
+
+#dx-tool-options .dx-tool-option-panel {
+	display: none;
+	margin-right: 50px;
+}
+
+#dx-tool-options .dx-tool-option-panel.dx-tool-options-visible {
+	display: inline-block;
+}
+
+#dx-tool-options .dx-tool-option-panel .dx-tool-option {
+	float: none !important;
+	display: inline-block !important;
+	vertical-align: middle;
+	margin-right: 20px;
+}
+
+.dx-tool-option {
+	margin-top: -5px;
+}
+
+#dx-tool-options .dx-tool-options-title {
+	width: 70px;
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0 20px 0 0;
+	color: #4a4a4a;
+	display: inline-block;
+}
+
+#dx-tool-options .dx-pencil-options input[type="range"] {
+	width: 200px;
+
+	/* CHROME, SAFARI, OPERA */
+	-webkit-appearance: none;
+}
+
+/* CHROME, SAFARI, OPERA */
+#dx-tool-options .dx-pencil-options input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    background: rgb(192, 192, 192);
+	margin-top: -3px;
+	border: 1px solid #979797;
+}
+
+/* INTERNET EXPLORER 10+ */
+#dx-tool-options .dx-pencil-options input[type=range]::-ms-thumb {
+    border: none;
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    background: rgb(192, 192, 192);
+	border: 1px solid #979797;  
+}
+
+/* FIREFOX */
+#dx-tool-options .dx-pencil-options input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    background: rgb(192, 192, 192);
+	border: 1px solid #979797; 
+}
+
+#dx-tool-options .dx-shape-options .dx-shape-icon {
+	line-height: initial;
+	vertical-align: middle;
+	display: inline-block;
+	border-radius: 5px;
+	height: 50px !important;
+}
+
+#dx-tool-options .dx-shape-options .dx-shape-icon:hover {
+	background-color: rgba(0,0,0,0.07);
+}
+
+#dx-tool-options .dx-shape-options .dx-shape-icon:hover {
+	cursor: pointer;
+}
+
+#dx-tool-options .dx-shape-options .dx-shape-icon img {
+	width: 50px;
+	height: 50px;
+	pointer-events: none;
+}
+
+#dx-tool-options .dx-shape-options .dx-shape-icon.dx-shape-selected {
+	background: rgba(0, 0, 0, 0.11);
+}
+
+#dx-tool-options input {
+	vertical-align: middle;
+}
+
+#dx-tool-options label:hover {
+	user-select: none;
+}
+
+#dx-tool-options .dx-range-option-icon {
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: initial;
+}
+
+#dx-tool-options .dx-range-option-icon.dx-range-option-icon-small {
+	width: 20px;
+	height: 20px;
+}
+
+#dx-tool-options .dx-range-option-icon.dx-range-option-icon-large {
+	width: 40px;
+	height: 40px;
+}
+
+/*
+	Tools
+*/
+.tool_button, .push_button, .tool_button_current, .push_button_pressed {
+	width: 50px;
+	height: 50px;
+	-webkit-box-shadow: initial;
+	-moz-box-shadow: initial;
+	box-shadow: initial;
+	background-color: transparent;
+	box-sizing: border-box;
+	padding: 5px 12px 12px 12px;
+	margin: 0;
+	line-height: initial;
+}
+
+.tool_button:hover, .push_button:hover, .buttonup:hover, .buttondown {
+	background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+.tool_button_current,
+.push_button_pressed,
+.buttondown {
+	background-color: rgba(0, 0, 0, 0.11) !important;
+}
+
+#tools_left .tool_button, #tools_left .tool_button_current {
+	margin-bottom: 4px;
+}
+
+#tools_left .tool_button, #tools_left .tool_button_current, .push_button, .push_button_pressed {
+	position: relative;
+}
+
+#tool_dx_fill_colorpicker:hover, #tool_dx_stroke_colorpicker:hover {
+	-webkit-box-shadow: initial !important;
+	-moz-box-shadow: initial !important;
+	box-shadow: initial !important;
+	background-color: transparent !important;
+}
+
+/*
+	Button titles
+*/
+#tools_left .tool_button::after, #tools_left .tool_button_current::after, .push_button::after, .push_button_pressed::after {
+	text-align: center;
+	font-size: 10px;
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+	color: #555;
+	/*
+		@TODO After grooming all titles on tools we can use this method instead
+	*/
+	/*content: attr(title);*/
+}
+
+#tool_select::after {
+	content: "Edit";
+}
+
+#tool_fhpath::after {
+	content: "Pencil";
+}
+
+#tool_line::after {
+	content: "Line";
+}
+
+#tool_dx_shapes::after {
+	content: "Shape";
+}
+
+#tool_text::after {
+	content: "Text";
+}
+
+#dx_fill_tool::after {
+	content: "Fill";
+}
+
+#dx_view_grid::after {
+	content: "Grid";
+}
+
+#tool_delete_multi::after {
+	content: "Delete";
+}
+
+#tool_undo::after {
+	content: "Undo";
+}
+
+#tool_redo::after {
+	content: "Redo";
+}
+
+#tool_delete_multi::after, #tool_undo::after, #tool_redo::after {
+	margin-bottom: -2px;
+}
+
+#tool_dx_arrows::after {
+	content: "Arrow";
+}
+
+#tool_dx_fill_colorpicker::after {
+	content: "Fill";
+}
+
+#tool_dx_stroke_colorpicker::after {
+	content: "Color";
+}
+
+/*
+	Workarea
+*/
+#workarea {
+	top: 60px !important;
+	left: 60px !important;
+	bottom: 0 !important;
+	right: 0 !important;
+	overflow: hidden !important;
+}
+
+/*
+	Colorpicker palette
+*/
+.dx-colorpicker-palette {
+	position: absolute;
+	display: none;
+	font-size: 0;
+	margin-left: 6px;
+	border-collapse: collapse;
+}
+
+.dx-colorpicker-palette .dx-colorpicker-palette-color {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #CCC;
+	cursor: pointer;
+}
+
+.dx-colorpicker-palette .dx-colorpicker-palette-color-transparent {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+45,ff3030+50,ffffff+55,ffffff+100 */
+	background: #ffffff !important; /* Old browsers */
+	background: -moz-linear-gradient(-45deg, #ffffff 0%, #ffffff 45%, #ff3030 50%, #ffffff 55%, #ffffff 100%) !important; /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg, #ffffff 0%,#ffffff 45%,#ff3030 50%,#ffffff 55%,#ffffff 100%) !important; /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg, #ffffff 0%,#ffffff 45%,#ff3030 50%,#ffffff 55%,#ffffff 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.dx-colorpicker-palette .dx-colorpicker-palette-color-selected {
+	pointer-events: none;
+	border-color: #000;
+}
+
+.dx-colorpicker-palette-icon {
+	width: 24px;
+	height: 24px;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.dx-colorpicker-palette-icon.dx-colorpicker-stroke {
+	border: 12px solid #333;
+}
+
+input[type=range].dx-clean-range-input {
+	-webkit-appearance: none;
+	width: 200px;
+	background: transparent;
+	display: inline-block;
+	vertical-align: middle;
+	/* height: 36px !important;
+	margin: 0 !important; */
+}
+
+input[type=range].dx-clean-range-input:focus {
+	outline: none;
+}
+
+input[type=range].dx-clean-range-input::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 4px;
+	cursor: pointer;
+	background: #333333;
+	border-radius: 2px;
+}
+
+input[type=range].dx-clean-range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    background: rgb(192, 192, 192);
+	margin-top: -12px;
+	border: 1px solid #979797;
+}
+
+input[type=range].dx-clean-range-input:focus::-webkit-slider-runnable-track {
+	background: #333333;
+}
+
+input[type=range].dx-clean-range-input::-moz-range-track {
+	width: 100%;
+	height: 4px;
+	cursor: pointer;
+	background: #333333;
+	border-radius: 2px;
+}
+
+input[type=range].dx-clean-range-input::-moz-range-thumb {
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    background: rgb(192, 192, 192);
+	margin-top: -12px;
+	border: 1px solid #979797;
+	cursor: pointer;
+}
+
+input[type=range].dx-clean-range-input::-ms-track {
+	width: 100%;
+	height: 4px;
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+
+input[type=range].dx-clean-range-input::-ms-fill-lower {
+	background: #333333;
+	border-radius: 4px;
+}
+
+input[type=range].dx-clean-range-input::-ms-fill-upper {
+	background: #333333;
+	border-radius: 4px;
+}
+
+input[type=range].dx-clean-range-input::-ms-thumb {
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    background: rgb(192, 192, 192);
+	margin-top: -12px;
+	border: 1px solid #979797;
+	cursor: pointer;
+	height: 4px;
+}
+
+input[type=range].dx-clean-range-input:focus::-ms-fill-lower {
+	background: #333333;
+}
+
+input[type=range].dx-clean-range-input:focus::-ms-fill-upper {
+	background: #333333;
+}
+
+input[type=range].dx-stroke-range-input {
+	-webkit-appearance: none;
+	width: auto;
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265 25"><path fill="#333" stroke="#333" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" d="M2.5 12.5l250-10s10 0 10 10-10 10-10 10l-250-10z" pointer-events="inherit"/></svg>') no-repeat left center;
+	display: inline-block;
+	vertical-align: middle;
+	height: 25px !important;
+	margin: 0 !important;
+}
+
+input[type=range].dx-stroke-range-input:focus {
+	outline: none;
+}
+
+input[type=range].dx-stroke-range-input::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 20px;
+	cursor: pointer;
+	background: transparent;
+	border-radius: 2px;
+}
+
+input[type=range].dx-stroke-range-input::-webkit-slider-thumb {
+	border: 1px solid #979797;
+	height: 36px;
+	width: 16px;
+	border-radius: 3px;
+	background: #dddddd;
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -8px;
+}
+
+input[type=range].dx-stroke-range-input::-moz-range-track {
+	width: 100%;
+	height: 4px;
+	cursor: pointer;
+	background: transparent;
+	border-radius: 2px;
+}
+
+input[type=range].dx-stroke-range-input::-moz-range-thumb {
+	border: 1px solid #979797;
+	height: 36px;
+	width: 16px;
+	border-radius: 3px;
+	background: #dddddd;
+	cursor: pointer;
+}
+
+input[type=range].dx-stroke-range-input::-ms-track {
+	width: 100%;
+	height: 4px;
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+
+input[type=range].dx-stroke-range-input::-ms-fill-lower {
+	background: transparent;
+	border-radius: 4px;
+}
+
+input[type=range].dx-stroke-range-input::-ms-fill-upper {
+	background: transparent;
+	border-radius: 4px;
+}
+
+input[type=range].dx-stroke-range-input::-ms-thumb {
+	border: 1px solid #979797;
+	height: 36px;
+	width: 16px;
+	border-radius: 3px;
+	background: #dddddd;
+	cursor: pointer;
+	height: 4px;
+}
+
+input[type=range].dx-stroke-range-input:focus::-ms-fill-lower {
+	background: transparent;
+}
+
+input[type=range].dx-stroke-range-input:focus::-ms-fill-upper {
+	background: transparent;
+}
+
+.dx-grid-snap-container {
+	display: none;
+}
+
+.dx-grid-snap-container.dx-grid-snap-container-visible {
+	display: block;
+    position: relative;
+    margin-right: 20px !important;
+}
+/* DigiExam dx-button copy */
+#save_and_close:active {
+	background: #5a9e17;
+	border-color: rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.07), inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+#save_and_close:hover {
+	border-color: rgba(0, 0, 0, 0.35);
+	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+#save_and_close:focus {
+	box-shadow: 0 0 0 3px #1aa2e6;
+	pointer-events: none;
+}
+
+#save_and_close {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	background: #66b31a;
+	color: white;
+	border-radius: 2px;
+	font-size: 14px;
+	padding: 1px 10px;
+	margin: 0;
+	margin-top: 5px;
+	margin-left: 10px;
+	line-height: 38px;
+	transition: box-shadow .2s ease-out;
+	font-weight: 400;
+}

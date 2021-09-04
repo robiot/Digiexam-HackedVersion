@@ -1,0 +1,53 @@
+<div class="webBrowser" ng-show="vm.visible">
+	<div class="webBrowser_container">
+		<div class="webBrowser_toolbar">
+			<div class="webBrowser_toolbar_edgeItem" ng-if="vm.currentResource.navigationRestriction !== vm.DX_NAVIGATION_RESTRICTION.SINGLE_PAGE">
+				<button
+						ng-click="vm.webBrowser.back()"
+						ng-disabled="!vm.canGoBack"
+						class="mr-300 iconButton">
+					<img src="images/icon_arrow_left.svg" alt="Back" />
+				</button>
+				<button
+						ng-click="vm.webBrowser.forward()"
+						ng-disabled="!vm.canGoForward"
+						class="mr-300 iconButton">
+					<img src="images/icon_arrow_right.svg" alt="Forward" />
+				</button>
+				<button ng-click="vm.home()" class="mr-300 iconButton"><img src="images/icon_home.svg" alt="Home" /></button>
+			</div>
+
+			<div class="webBrowser_toolbar_title">
+				<ng-include 
+						ng-if="vm.currentResource.type === vm.DX_RESOURCE_TYPE.AUDIO"
+						src="'images/onlineResources_icon_audio.svg'"
+						class="mr-300 webview_toolbar_onlineResourceIcon"
+						alt="..."></ng-include>
+				<ng-include 
+						ng-if="vm.currentResource.type === vm.DX_RESOURCE_TYPE.PDF"
+						src="'images/onlineResources_icon_pdf.svg'"
+						class="mr-300 webview_toolbar_onlineResourceIcon"
+						alt="..."></ng-include>
+				<ng-include 
+						ng-if="vm.currentResource.type === vm.DX_RESOURCE_TYPE.URL"
+						src="'images/onlineResources_icon_url.svg'"
+						class="mr-300 webview_toolbar_onlineResourceIcon"
+						alt="..."></ng-include>
+				<ng-include
+						ng-if="vm.currentResource.type === vm.DX_RESOURCE_TYPE.YOUTUBE"
+						src="'images/onlineResources_icon_youtube.svg'"
+						class="mr-300 webview_toolbar_onlineResourceIcon"
+						alt="..."></ng-include>
+
+				<span>{{vm.currentResource.title}}</span>
+			</div>
+
+			<div class="webBrowser_toolbar_edgeItem textRight">
+				<button ng-click="vm.webBrowser.reload()" class="mr-300 iconButton"><img src="images/icon_refresh.svg" alt="Reload" /></button>
+				<button ng-click="vm.close()" class="iconButton"><img src="images/icon_close.svg" alt="Close" /></button>
+			</div>
+		</div>
+
+		<div class="webView_wrapper-onlineResource"></div>
+	</div>
+</div>

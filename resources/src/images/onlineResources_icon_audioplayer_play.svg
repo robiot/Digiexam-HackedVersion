@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="30px" viewBox="0 0 26 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_audioplayer_play</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon_audioplayer_play" fill="#4A4A4A">
+            <path d="M23.5488722,11.0280676 L6.43179377,0.609397808 C3.566058,-1.13391057 0,1.07153467 0,4.58102949 L0,25.418369 C0,28.9324394 3.566058,31.1333091 6.43179377,29.3900007 L23.5488722,18.9759065 C26.4360902,17.2188713 26.4360902,12.7851028 23.5488722,11.0280676" id="play-[#1003]"></path>
+        </g>
+    </g>
+</svg>

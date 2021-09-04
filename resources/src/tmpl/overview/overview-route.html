@@ -1,0 +1,225 @@
+<div
+		class="overview overflow-y-auto overflow-x-hidden"
+		layout
+		layout-align="start start"
+		layout-padding
+		layout-cover-relative>
+	<div flex="33" class="p-300 overview_column">
+		<h3 class="pt-300 mb-400 pl-300">{{"Overview.FindExam" | i18n}}</h3>
+
+		<div class="sheet">
+			<h3 class="mb-300">{{"Overview.ExamID" | i18n}}</h3>
+			<input type="text" dx-exam-id-parser ng-model="vm.openExamId" id="overViewOpenExamCode" ng-enter="vm.getOpenExam()" />
+
+			<button
+					dx-button="default"
+					class="mt-300"
+					ng-click="vm.getOpenExam()"
+					ng-disabled="!vm.isValidOpenExamCode(vm.openExamId)">
+				{{"Overview.FindExam.Button" | i18n}}
+			</button>
+		</div>
+		<div class="sheet">
+			<h3 class="mb-300">{{"Tools.StartFromUSB" | i18n}}</h3>
+
+			<span ng-if="vm.dxDetectPlatform() !== 'IOS_WEBVIEW'">
+				<p class="mv-300">{{"Overview.StartFromUSB.Info" | i18n}}</p>
+
+				<button dx-button="default" ng-click="vm.openOfflineFile()">{{"Overview.StartFromUSB.Button" | i18n}}</button>
+				<input
+						ng-if="vm.isAndroid"
+						id={{vm.inputElementId}}
+						type="file"
+						style="display:none;"/>
+			</span>
+
+			<span ng-if="vm.dxDetectPlatform() === 'IOS_WEBVIEW'">
+				<p>{{"Overview.StartFromUSB.IOS" | i18n}}</p>
+			</span>
+		</div>
+	</div>
+
+	<div flex="33" class="p-300 overview_column">
+		<h3 class="pt-300 mb-400 pl-300">
+			{{"Overview.Exams" | i18n}}
+		</h3>
+
+		<div class="sheet activeExams">
+			<div class="activeExams_header mb-500">
+				<h3>{{"Overview.SelectExam" | i18n}}</h3>
+					<button class="button-reset">
+					<img
+							class="reloadExams"
+							src="images/icon_reload.svg"
+							ng-click="vm.refreshExams(); vm.animateIcon($event)"
+							title="{{'Overview.GroupExam.Button' | i18n}}"
+							alt=""/>
+						<span class="sr-only">{{'Overview.GroupExam.Button' | i18n}}</span>
+					</button>
+			</div>
+
+			<div class="activeExams_container">
+				<dx-loading-spinner ng-show="vm.loadingExams">
+					<p class="text-center">{{"Overview.LoadingExams" | i18n}}</p>
+				</dx-loading-spinner>
+
+				<div class="alert alert-info" ng-show="vm.exams.length == 0 && !vm.loadingExams">
+					<p>{{"Overview.SelectExam.Error" | i18n}}</p>
+				</div>
+
+				<ul class="examlist" ng-show="vm.exams.length > 0 && !vm.loadingExams">
+					<li ng-repeat="exam in vm.exams"
+						ng-class="vm.selectedExam.examId === exam.examId ? 'selected' : 'default'"
+						ng-click="vm.selectExam(exam)">
+						<div class="examlist_titleWrapper">
+							<h4>{{exam.title}}</h4>
+							<div class="examlist_details" ng-show="exam.course">
+								{{"Overview.ExamDetails.Course" | i18n}}: {{exam.course}}
+							</div>
+							<div class="examlist_details" ng-show="!exam.course">
+								{{"Overview.ExamID" | i18n}}: {{exam.examId}}
+							</div>
+						</div>
+
+						<img src="images/chevron.svg" alt="" />
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="sheet demoExam">
+			<div class="demoExam_header mb-500">
+				<h3 class="mb-300">{{"Overview.DemoExam" | i18n}}</h3>
+				<p>{{"Overview.DemoExam.Info" | i18n}}</p>
+			</div>
+
+			<ul class="examlist">
+				<li
+						ng-class="vm.selectedExam.examId === vm.demoExamListing.examId ? 'selected' : 'default'"
+						ng-click="vm.selectExam(vm.demoExamListing)">
+					<div class="examlist_titleWrapper">
+						<h4>{{vm.demoExamListing.title}}</h4>
+						<div class="examlist_details">
+							{{"Overview.ExamDetails.Course" | i18n}}: {{vm.demoExamListing.details}}
+						</div>
+					</div>
+
+					<img src="images/chevron.svg" alt="" />
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div flex="33" class="p-300 flexShrinkContent overview_column" ng-show="vm.exams.length > 0 || vm.selectedExam">
+		<h3 class="pt-300 mb-400 pl-300">{{"Overview.ExamDetails" | i18n}}</h3>
+
+		<div class="sheet">
+			<div class="alert alert-info" ng-show="vm.selectedExam == null && !vm.loadingExams">
+				<p>{{"Overview.SelectExam.Info" | i18n}}</p>
+			</div>
+
+			<div ng-if="vm.selectedExam" class="examDetails">
+				<h2>{{vm.selectedExam.title}}</h2>
+
+				<div class="examDetails_section">
+					<div class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.CreatedBy" | i18n}}</span>
+						<span class="examDetails_data">{{vm.selectedExam.owner}}</span>
+					</div>
+					<div class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.Organization" | i18n}}</span>
+						<span class="examDetails_data">{{vm.selectedExam.organisation}}</span>
+					</div>
+					<div ng-show="vm.selectedExam.course" class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.Course" | i18n}}</span>
+						<span class="examDetails_data">{{vm.selectedExam.course}}</span>
+					</div>
+				</div>
+
+				<div class="examDetails_section">
+					<div ng-show="vm.selectedExam.duration" class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.TimeLimit" | i18n}}</span>
+						<span class="examDetails_data">{{vm.selectedExam.duration | dxReadableTime : "nanoseconds"}}</span>
+					</div>
+					<div class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.LockdownMode" | i18n}}</span>
+						<span class="examDetails_data">{{vm.selectedExam.openBook ? "Overview.ExamDetails.LockdownMode.Off" : "Overview.ExamDetails.LockdownMode.On" | i18n}}</span>
+					</div>
+					<div class="examDetails_row" ng-show="vm.selectedExam.remoteProctoringEnabled">
+						<span class="examDetails_label">{{"Overview.ExamDetails.RemoteProctoringEnabled" | i18n}}</span>
+						<span class="examDetails_data">{{"Overview.ExamDetails.RemoteProctoringEnabled.On" | i18n}}</span>
+					</div>
+				</div>
+
+				<div class="examDetails_section">
+					<div class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.Status" | i18n}}</span>
+						<span class="examDetails_data">{{vm.selectedExam.statusText | i18n}}</span>
+					</div>
+					<div class="examDetails_row">
+						<span class="examDetails_label"></span>
+						<span
+								ng-show="vm.selectedExam.status === vm.DX_EXAM_STATUS.NOT_READY_TO_START"
+								class="examDetails_data">
+							{{vm.selectedExam.startDateFmt}}
+						</span>
+					</div>
+					<div class="examDetails_row">
+						<span class="examDetails_label"></span>
+						<span
+								ng-show="vm.selectedExam.status === vm.DX_EXAM_STATUS.NOT_READY_TO_START ||
+									vm.selectedExam.status === vm.DX_EXAM_STATUS.READY_TO_START_SOON"
+								class="examDetails_data">
+							{{vm.selectedExam.startTimeFmt}}
+						</span>
+					</div>
+					<div ng-show="vm.isNumber(vm.selectedExam.timeLeft)" class="examDetails_row">
+						<span class="examDetails_label">{{"Overview.ExamDetails.TimeLeft" | i18n}}</span>
+						<span class="examDetails_data">
+							{{vm.selectedExam.timeLeft ? (vm.selectedExam.timeLeft | dxReadableTime) : ("Overview.ExamDetails.TimeIsUp" | i18n)}}
+						</span>
+					</div>
+				</div>
+
+				<div class="externalTools" ng-if="vm.selectedExam.externalTools.length > 0">
+					<h4 class="externalTools_heading">
+						{{"Overview.ExamDetails.ExternalTools.Heading" | i18n}}
+					</h4>
+
+					<div
+							ng-if="!vm.isIOS"
+							class="colorFaded font-size-small pb-300">
+						{{"Overview.ExamDetails.ExternalTools.Instruction" | i18n}}
+					</div>
+
+					<div
+							ng-if="vm.isIOS"
+							class="colorError font-size-small pb-300">
+						{{"ExternalTools.IOS.NotSupported.Text" | i18n}}
+					</div>
+
+					<dx-external-tool-button
+							ng-repeat="tool in vm.selectedExam.externalTools"
+							icon="tool.logo"
+							name="tool.title"
+							disabled="vm.isIOS"
+							ng-click="vm.openExternalTool(tool)">
+					</dx-external-tool-button>
+				</div>
+			</div>
+
+			<div class="mt">
+				<button
+						ng-show="vm.selectedExam && !vm.loadingExams"
+						dx-button="{{vm.selectedExam.status === vm.DX_EXAM_STATUS.HANDED_IN ? 'default' : 'cta'}}"
+						ng-class="['floatRight', {'dx-disabled': vm.selectedExam.status === vm.DX_EXAM_STATUS.NOT_READY_TO_START ||
+							vm.selectedExam.status === vm.DX_EXAM_STATUS.READY_TO_START_SOON}]"
+						ng-click="vm.confirmStartExam()">
+					{{vm.startExamButtonText[vm.selectedExam.status] | i18n}}
+				</button>
+				<div style="clear: right;"></div>
+			</div>
+		</div>
+	</div>
+	<dx-version></dx-version>
+</div>

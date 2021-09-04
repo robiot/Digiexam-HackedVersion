@@ -1,0 +1,35 @@
+<div class="extendedTime" layout="column">
+	<label ng-class="::{'disabled': !vm.enabled}" class="radio mb-300">
+		<input
+				ng-disabled="::!vm.enabled"
+				type="radio"
+				ng-model="vm.action"
+				value="{{::vm.DX_EXTENDED_TIME_ACTION.REMOVE}}"  />
+		{{"Duration.RemoveLimit" | i18n}}
+	</label>
+
+	<label ng-class="::{'disabled': !vm.enabled}" class="radio mb-300">
+		<input
+				ng-disabled="::!vm.enabled"
+				class="extendedTime_extendRadio"
+				type="radio"
+				ng-model="vm.action"
+				value="{{::vm.DX_EXTENDED_TIME_ACTION.EXTEND}}" />
+		{{"Duration.ExtendTime0" | i18n}}
+		<input
+				ng-disabled="::!vm.enabled"
+				ng-focus="vm.selectExtend()"
+				ng-blur="vm.validateMinutes()"
+				ng-model="vm.extendedMinutes"
+				type="number"
+				min="0"
+				dx-integer-input />
+		{{"Duration.ExtendTime1" | i18n}}
+	</label>
+
+	<p
+			ng-show="vm.action === vm.DX_EXTENDED_TIME_ACTION.EXTEND"
+			class="extendedTime_newTimeLeft">
+		{{"Duration.ExtendTime2" | i18n}} {{vm.calculateNewTime() | dxReadableTime}}
+	</p>
+</div>

@@ -1,0 +1,31 @@
+<div class="dialog" ng-controller="DxHandInOfflineDialogController as vm">
+	<div class="dialog_header">
+		<h1 class="h1 mh-500">{{"HandInOffline.Title0" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body" ng-if="vm.platform === vm.DX_CLIENT_TYPE.ELECTRON_WINDOWS || vm.platform === vm.DX_CLIENT_TYPE.ELECTRON_MAC ">
+		<div class="m-500">
+			<img class="mb" src="images/guide_save-to-usb.svg" />
+			<p class="mb">{{"HandInOffline.TextElectron0" | i18n}}</p>
+			<h3 class="h3">{{"HandInOffline.TextElectron1" | i18n}}</h3>
+			<p class="colorError mt" ng-show="vm.error">{{vm.error}}</p>
+		</div>
+	</div>
+
+	<div class="dialog_body" ng-if="vm.platform === vm.DX_CLIENT_TYPE.CHROMEBOOK|| vm.platform === vm.DX_CLIENT_TYPE.ANDROID">
+		<div class="m-500">
+			<img class="mb" src="images/guide_save-to-usb.svg" />
+			<p class="mb">{{"HandInOffline.TextChromebook" | i18n}}</p>
+			<p class="colorError mt" ng-show="vm.error">{{vm.error}}</p>
+		</div>
+	</div>
+
+	<div class="dialog_footer" ng-if="vm.platform === vm.DX_CLIENT_TYPE.CHROMEBOOK || vm.platform === vm.DX_CLIENT_TYPE.ANDROID">
+		<button
+				dx-dialog-autofocus
+				ng-click="vm.saveToDevice()"
+				dx-button="cta">
+			{{"HandInOffline.SaveToUSB" | i18n}}
+		</button>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 class="h1">{{"StartExam.Confirm.Title2" | i18n}}</h1>
+	</div>
+
+	<div ng-if="!isWindows" class="dialog_body">
+		<p class="mb">{{"StartExam.Confirm.Text.Mac" | i18n}}</p>
+		<p class="text-italic">{{processes}}</p>
+	</div>
+
+	<div ng-if="isWindows" class="dialog_body">
+		<p class="mb">{{"StartExam.Confirm.Text.Win" | i18n}}</p>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				ng-disabled="disableButtons"
+				ng-click="cancelClicked()"
+				dx-button="default"
+				class="mr-300">
+			{{"StartExam.Confirm.Cancel" | i18n}}
+		</button>
+		<button
+				ng-disabled="disableButtons"
+				ng-click="continueClicked()"
+				dx-button="cta">
+			{{"StartExam.Confirm.StartExam1" | i18n}}
+		</button>
+	</div>
+</div>

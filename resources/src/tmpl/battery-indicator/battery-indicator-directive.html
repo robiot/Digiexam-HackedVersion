@@ -1,0 +1,15 @@
+<div class="batteryIcon">
+	<span class="batteryIcon_text">{{vm.battery.level * 100 | number:0}}%</span>
+
+	<span class="batteryIcon_container">
+		<ng-include ng-show="vm.battery.charging" src="'images/charging.svg'" class="batteryIcon_chargingIcon batteryIcon_chargingIcon-noFill"></ng-include>
+
+		<span class="batteryIcon_bar" ng-style="vm.batteryBarStyle">
+			<ng-include ng-show="vm.battery.charging" src="'images/charging.svg'" class="batteryIcon_chargingIcon batteryIcon_chargingIcon-fill"></ng-include>
+		</span>
+
+		<span class="batteryIcon_button"></span>
+	</span>
+</div>
+
+

@@ -1,0 +1,49 @@
+<div class="mb-700">
+	<div class="horizontalFormRow no-margin">
+		<label class="horizontalFormRow_label textRight">
+			<p class="display-inline-block mb-400 text-bold">{{"TextToSpeech.Title" | i18n}}</p>
+		</label>
+	</div>
+	<div class="horizontalFormRow">
+		<label class="horizontalFormRow_label textRight">
+			<p class="fontSizeSmall">{{"TextToSpeech.Setting.Speed" | i18n}}</p>
+		</label>
+        <div class="horizontalFormRow_field ml-500">
+			<img src="images/textToSpeech_icon_turtle.svg" width="30" class="mr-300" />
+			<dx-slider
+					marker="vm.textToSpeechSpeed"
+					on-change="vm.onChangeSpeed"
+					min="0"
+					max="100"
+					step="1" >
+			</dx-slider>
+			<img src="images/textToSpeech_icon_hare.svg" width="30" class="ml-300" />
+        </div>
+	</div>
+	<div
+			class="horizontalFormRow">
+		<label
+				class="horizontalFormRow_label textRight">
+			<p class="fontSizeSmall">{{"TextToSpeech.Setting.Voice" | i18n}}</p>
+		</label>
+        <div class="horizontalFormRow_field ml-500">
+			<select
+					class="select mb-200"
+					ng-model="vm.textToSpeechVoice"
+					ng-options="voice as voice.name group by vm.translatedVoiceCodes[voice.lang] for voice in vm.textToSpeechAvailableVoices">
+			</select>
+        </div>
+	</div>
+	<div
+			class="horizontalFormRow">
+		<label
+				class="horizontalFormRow_label textRight">
+			<p class="fontSizeSmall">{{"TextToSpeech.Setting.ShortcutKeys" | i18n}}</p>
+		</label>
+		<div class="horizontalFormRow_field ml-500">
+			<img src="images/textToSpeech_icon_alt_key.svg" width="40" class="mr-300" />
+			+
+			<img src="images/textToSpeech_icon_A_key.svg" width="40" class="mr-300 ml-300" />
+		</div>
+	</div>
+</div>

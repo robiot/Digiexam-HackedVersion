@@ -1,0 +1,74 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 class="h1">{{"Settings.AccessibilitySettings.Title" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body p-800" layout="column">
+		<label class="checkbox mb-300">
+			<input
+					class="mr-300"
+					type="checkbox"
+					ng-model="spellcheckEnabled"/>
+			{{"AccessibilitySettings.AllowSpellCheck" | i18n}}
+		</label>
+
+		<label class="checkbox mb-300">
+			<input
+					class="mr-300"
+					type="checkbox"
+					ng-model="textToSpeechEnabled"/>
+			{{"AccessibilitySettings.AllowTextToSpeech" | i18n}}
+		</label>
+
+		<label ng-class="::{'disabled': !durationEnabled}" class="checkbox mb-300">
+			<input
+					ng-disabled="::!durationEnabled"
+					class="mr-300"
+					type="checkbox"
+					ng-model="extendedTimeEnabled"/>
+			{{"AccessibilitySettings.AllowExtendedTime" | i18n}}
+		</label>
+
+		<dx-extended-time
+				ng-show="extendedTimeEnabled"
+				class="ml-500"
+				action="extendedTimeAction"
+				extended-minutes="extendedMinutes"
+				enabled="durationEnabled">
+		</dx-extended-time>
+
+		<label class="checkbox mb-300">
+			<input
+					class="mr-300"
+					type="checkbox"
+					ng-model="usbAudioEnabled"/>
+			{{"AccessibilitySettings.AllowUsbAudio" | i18n}}
+		</label>
+
+		<div class="mb-300">
+			<label class="checkbox">
+				<input
+						class="mr-300"
+						type="checkbox"
+						ng-model="immersiveReaderEnabled"/>
+				{{"AccessibilitySettings.AllowImmersiveReader" | i18n}}
+			</label>
+			<div class="color-text-faded ml-600 font-size-small">{{"AccessibilitySettings.AllowImmersiveReader.Disclaimer" | i18n}}</div>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				dx-dialog-autofocus
+				ng-click="close()"
+				dx-button="default"
+				class="mr-300">
+			{{"AccessibilitySettings.Cancel" | i18n}}
+		</button>
+		<button
+				ng-click="saveAndClose()"
+				dx-button="cta">
+			{{"AccessibilitySettings.SaveAndClose" | i18n}}
+		</button>
+	</div>
+</div>

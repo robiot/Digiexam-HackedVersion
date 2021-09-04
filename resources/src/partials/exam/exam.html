@@ -1,0 +1,57 @@
+<div
+		class="exam"
+		layout-cover-relative
+		layout="row">
+	<dx-loading-spinner ng-show="isLoading" class="exam_loader">
+		<p class="text-center">{{"StartExam.Loading" | i18n}}</p>
+	</dx-loading-spinner>
+
+	<dx-question-navigation
+			ng-show="!isLoading"
+			class="exam_questionNavigation">
+	</dx-question-navigation>
+
+	<div
+			ng-show="!isLoading"
+			class="exam_question"
+			dx-scroll="y">
+		<div class="sheet sheet-questionAnswerSheet dxContainer dxContainer-large">
+
+			<dx-exam-intro ng-show="dxActiveExam.getActiveView() === DX_EXAM_VIEWS.INTRO"></dx-exam-intro>
+
+			<div ng-show="dxActiveExam.getActiveView() !== DX_EXAM_VIEWS.INTRO">
+				<dx-active-question
+						ng-class="{'rtl': exam.rightToLeft}"
+						question="activeQuestion"
+						answer="activeAnswer"
+						exam="exam">
+				</dx-active-question>
+
+				<div class="clearfix">
+					<button
+							ng-if="!dxActiveExam.isLockedQuestionSequence()"
+							ng-click="previousView()"
+							dx-button="default">
+						{{ dxActiveExam.getActiveView() === 0 ? "ActiveQuestion.ExamInfo.Button" : "ActiveQuestion.PreviousQuestion" | i18n}}
+					</button>
+
+					<button
+							ng-show="!activeViewIsLastQuestion()"
+					        ng-click="nextView()"
+					        dx-button="cta"
+							class="floatRight">
+						<img ng-show="dxActiveExam.isLockedQuestionSequence()" src="images/icon_lock_no_bg_white.svg"/>
+						{{"ActiveQuestion.NextQuestion" | i18n}}
+					</button>
+					<span ng-show="activeViewIsLastQuestion() && !dxActiveExam.isLockedQuestionSequence()" class="exam_lastQuestionText floatRight">
+						<strong>{{"ActiveQuestion.LastQuestionText0" | i18n}}</strong>
+						<br />
+						{{"ActiveQuestion.LastQuestionText1" | i18n}}</span>
+				</div>
+			</div>
+		</div>
+
+		<dx-version></dx-version>
+	</div>
+	<dx-audio-player ng-show="usbConnected || (exam.usbAudioAllowed && isAndroid)"></dx-audio-player>
+</div>

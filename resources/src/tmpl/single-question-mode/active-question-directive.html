@@ -1,0 +1,166 @@
+<div
+	ng-if="vm.question && vm.answer && vm.exam"
+	class="activeQuestion mb-900">
+	<div class="bookmark">
+		<div
+				ng-if="!vm.dxActiveExam.isLockedQuestionSequence()"
+				ng-click="vm.toggleBookmark()"
+				class="bookmark_triangle bookmark_triangle-large"
+				ng-class="{'bookmark_triangle-opacity': !vm.answer.bookmarked}">
+		</div>
+		<button
+			title="{{'ActiveQuestion.ReadabilityMode' | i18n }}"
+			class="iconButton bookmark_button mr-600"
+			ng-class="{'iconButton-selected': vm.dxReadability.getQuestionState(vm.dxActiveExam.getActiveView())}"
+			ng-click="vm.toggleReadabilityMode()">
+			<img src="images/icon_readability.svg"/>
+		</button>
+		<button
+				ng-show="vm.dxActiveExam.getExam().immersiveReaderAllowed"
+				ng-click="vm.toggleImmersiveReaderQuestion()"
+				class="iconButton bookmark_immersiveReader mr-600"
+				title="{{'Accessibility.ImmersiveReader.Question' | i18n}}">
+			<ng-include
+						class="bookmark_immersiveReader_icon"
+						src="'images/icon_immersive_reader.svg'"></ng-include>
+		</button>
+	</div>
+	<div
+			class="mb"
+			id="{{vm.DX_EXAM_SECTION.QUESTION_BLOCK}}">
+		<h3
+				ng-class="{'readabilityMode': vm.dxReadability.getQuestionState(vm.dxActiveExam.getActiveView())}"
+				class="question-title mb mt-300">
+			{{vm.question.title}}
+		</h3>
+		<dx-froala-html
+			src="{html: vm.question.bodyHTML, images: vm.question.images, wordGapAnswer: vm.answer}"
+			readability="vm.dxReadability.getQuestionState(vm.dxActiveExam.getActiveView())"
+			right-to-left="vm.exam.rightToLeft"
+			word-gap-mode="vm.DX_WORD_GAP_MODE.INPUT"
+			word-gap-updated="vm.onAnswerChange">
+		</dx-froala-html>
+	</div>
+
+	<div
+			class="onlineResourceEntry"
+			ng-class="{'mb-500': $last, 'mb-200': !$last}"
+			ng-repeat="onlineResource in vm.question.onlineResources">
+		<button
+				dx-button="default"
+				type="button"
+				class="onlineResourceEntry_button"
+				ng-click="::vm.dxOnlineResources.open(onlineResource)">
+			<img
+					ng-if="::onlineResource.type === vm.DX_RESOURCE_TYPE.AUDIO"
+					src="images/onlineResources_icon_audio.svg"
+					class="onlineResourceEntry_icon" />
+			<img
+					ng-if="::onlineResource.type === vm.DX_RESOURCE_TYPE.PDF"
+					src="images/onlineResources_icon_pdf.svg"
+					class="onlineResourceEntry_icon" />
+			<img
+					ng-if="::onlineResource.type === vm.DX_RESOURCE_TYPE.URL"
+					src="images/onlineResources_icon_url.svg"
+					class="onlineResourceEntry_icon" />
+			<img
+					ng-if="::onlineResource.type === vm.DX_RESOURCE_TYPE.YOUTUBE"
+					src="images/onlineResources_icon_youtube.svg"
+					class="onlineResourceEntry_icon"/>
+			<span
+					class="onlineResourceEntry_content">
+				{{::onlineResource.title}}
+				<span
+						ng-if="::onlineResource.navigationRestriction == vm.DX_NAVIGATION_RESTRICTION.SINGLE_PAGE"
+						class="onlineResourceEntry_subtitle">
+					{{"OnlineResource.SingleWebPage" | i18n}}
+				</span>
+				<span
+						ng-if="::onlineResource.navigationRestriction == vm.DX_NAVIGATION_RESTRICTION.DOMAIN"
+						class="onlineResourceEntry_subtitle">
+					{{"OnlineResource.WholeDomain" | i18n}}
+				</span>
+			</span>
+		</button>
+	</div>
+	<div class="answerHeader clearfix mb-200">
+		<p
+			ng-if="vm.exam.gradingType == vm.DX_GRADING_TYPES.SCORE"
+			class="answerHeader_score text-bold display-inline-block">
+			{{"ActiveQuestion.MaxScore" | i18n}}: {{vm.question.maxScore}}
+		</p>
+		<button
+				ng-show="vm.dxActiveExam.getExam().immersiveReaderAllowed &&
+							vm.question.type === vm.DX_QUESTION_TYPE.TEXT_QUESTION"
+				ng-click="vm.toggleImmersiveReaderAnswer()"
+				class="answerHeader_immersiveReader iconButton bookmark_immersiveReader floatRight"
+				title="{{'Accessibility.ImmersiveReader.Answer' | i18n}}">
+			<ng-include
+					class="bookmark_immersiveReader_icon"
+					src="'images/icon_immersive_reader.svg'"></ng-include>
+		</button>
+
+		<div
+				ng-if="vm.question.type === vm.DX_QUESTION_TYPE.MULTIPLE_CHOICE && vm.question.isAlternativeChoiceLimitEnabled"
+				class="mb-400">
+			<p class="text-bold">{{"ActiveQuestion.LimitedAlternatives" | i18n}}</p>
+			<p ng-if="!vm.answer.getSelectedAlternativeCount()" class="text-italic">
+				{{"ActiveQuestion.LimitedAlternatives.Info" | i18n:vm.question.alternativeChoiceLimit}}
+			</p>
+			<p ng-if="vm.answer.getSelectedAlternativeCount() && !vm.question.isAlternativeChoiceLimitReached(vm.answer)" class="text-italic">
+				{{"ActiveQuestion.LimitedAlternatives.Remaining" | i18n:vm.question.getRemainingAlternativeCount(vm.answer)}}
+			</p>
+			<p ng-if="vm.question.isAlternativeChoiceLimitReached(vm.answer)" class="text-italic">
+				{{"ActiveQuestion.LimitedAlternatives.NoLeft" | i18n}}
+			</p>
+		</div>
+	</div>
+	<div id="{{vm.DX_EXAM_SECTION.ANSWER_BLOCK}}">
+		<dx-block-editor-manager
+			hide="vm.question.type !== vm.DX_QUESTION_TYPE.TEXT_QUESTION || vm.dxActiveExam.getActiveView() === vm.DX_EXAM_VIEWS.INTRO"
+			question="vm.question"
+			spellcheck-allowed="vm.exam.spellcheckAllowed"
+			spellcheck-options="{defaultLanguage: vm.dxSession.language, defaultRegion: vm.dxSession.region}"
+			allow-external-paste="vm.exam.allowExternalPaste"
+			answer="vm.answer"
+			on-change="vm.onAnswerChange"
+			dictionary-directory="'dictionaries'"
+			on-copy-callback="vm.onCopyCallback"
+			is-windows="vm.isWindows">
+		</dx-block-editor-manager>
+		<ul
+				ng-if="vm.question.type == vm.DX_QUESTION_TYPE.SINGLE_CHOICE"
+				class="single-choice-question unstyledList spacedList">
+			<li ng-repeat="a in vm.question.alternatives">
+				<label
+						for="a-{{a.$$hashKey}}"
+						class="radio">
+					<input
+							type="radio"
+							id="a-{{a.$$hashKey}}"
+							ng-checked="vm.answer.hasThisAlternative(a.id)"
+							ng-click="vm.answer.setCorrectAlternative(a.id); vm.onAnswerChange()" />
+						{{a.title}}
+				</label>
+			</li>
+		</ul>
+		<ul
+				ng-if="vm.question.type == vm.DX_QUESTION_TYPE.MULTIPLE_CHOICE"
+				class="multi-choice-question unstyledList spacedList">
+			<li ng-repeat="a in vm.question.alternatives">
+				<label
+						for="a-{{a.$$hashKey}}"
+						ng-class="{'color-text-faded': !vm.answer.hasThisAlternative(a.id) && vm.question.isAlternativeChoiceLimitReached(vm.answer)}"
+						class="checkbox">
+					<input
+							type="checkbox"
+							id="a-{{a.$$hashKey}}"
+							ng-disabled="!vm.answer.hasThisAlternative(a.id) && vm.question.isAlternativeChoiceLimitReached(vm.answer)"
+							ng-checked="vm.answer.hasThisAlternative(a.id)"
+							ng-click="vm.answer.toggleCorrectAlternative(a.id); vm.onAnswerChange()" />
+						{{a.title}}
+				</label>
+			</li>
+		</ul>
+	</div>
+</div>

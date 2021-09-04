@@ -1,0 +1,67 @@
+<div class="mb-700">
+	<h1 class="text-center">{{vm.dxActiveExam.getExam().title}}</h1>
+</div>
+
+<div class="bookmark">
+	<button
+			title="{{'ActiveQuestion.ReadabilityMode' | i18n }}"
+			class="iconButton bookmark_button mr-300"
+			ng-class="{'iconButton-selected': vm.dxReadability.getQuestionState(vm.dxActiveExam.getActiveView())}"
+			ng-click="vm.toggleReadabilityMode()">
+		<img src="images/icon_readability.svg"/>
+	</button>
+
+	<button
+			ng-show="vm.dxActiveExam.getExam().immersiveReaderAllowed"
+			ng-click="vm.toggleImmersiveReader()"
+			class="iconButton bookmark_immersiveReader mr-600"
+			title="{{'Accessibility.ImmersiveReader' | i18n}}">
+		<ng-include
+				class="bookmark_immersiveReader_icon"
+				src="'images/icon_immersive_reader.svg'"></ng-include>
+	</button>
+</div>
+
+<div
+		ng-if="vm.dxActiveExam.getExam() && vm.dxActiveExam.getExam().durationSetting !== vm.DX_DURATION_SETTING.OFF"
+		class="mb-300">
+	<p>
+		<span class="text-bold">{{"ExamIntro.TimeLimit" | i18n}}</span> {{ vm.dxActiveExam.getExam().duration | dxReadableTime: "nanoseconds" }}
+	</p>
+</div>
+
+<div ng-if="vm.dxActiveExam.isLockedQuestionSequence()">
+	<div class="examIntro_lockedQuestionSequence">
+		<img src="images/icon_lock_bg_black.svg"/>
+		<p class="text-bold ml-200">{{"ExamIntro.LockQuestionSequence.Title" | i18n}}</p>
+	</div>
+	<p>{{"ExamIntro.LockQuestionSequence.Info" | i18n}}</p>
+</div>
+
+<div ng-class="{'rtl': vm.dxActiveExam.getExam().rightToLeft}" class="mb-300">
+	<dx-froala-html
+			src="{html: vm.dxActiveExam.getExam().aboutHTML}"
+			readability="vm.dxReadability.getQuestionState(vm.dxActiveExam.getActiveView())"
+			right-to-left="vm.dxActiveExam.getExam().rightToLeft">
+	</dx-froala-html>
+</div>
+
+<div class="mt-700 textCenter">
+	<button ng-click="vm.goToFirstQuestion()" dx-button="cta large">{{"ExamIntro.GoToFirstQuestion.Button" | i18n}}</button>
+</div>
+
+<div class="mt-300 textCenter">
+	<span class="colorDxLightBlack fontSizeLarge">{{"ExamIntro.GoodLuck" | i18n}}</span>
+</div>
+
+<hr ng-if="!vm.dxActiveExam.isLockedQuestionSequence()" class="mt-900 colorDxLightBlack" />
+
+<div ng-if="!vm.dxActiveExam.isLockedQuestionSequence()" class="examIntro_illustration">
+	<h2>{{"ExamIntro.Psst" | i18n}}</h2>
+
+	<div class="examIntro_illustration_box">
+		<img src="images/exam-intro-illustration.png" class="examIntro_illustration_image"/>
+		<p>{{"ExamIntro.ExamIllustration0" | i18n}}</p>
+		<p>{{"ExamIntro.ExamIllustration1" | i18n}}</p>
+	</div>
+</div>

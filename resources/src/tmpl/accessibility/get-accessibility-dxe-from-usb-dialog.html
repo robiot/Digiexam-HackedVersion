@@ -1,0 +1,74 @@
+<div class="dialog dialog-higherPosition">
+	<div class="dialog_header">
+		<h1>{{"Settings.Settings" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			<dx-volume-control ng-if="isWindows"></dx-volume-control>
+
+			<dx-text-to-speech-settings ng-show="textToSpeechEnabled"></dx-text-to-speech-settings>
+
+			<div ng-show="!isIOS">
+				<div class="horizontalFormRow mb-700">
+					<label class="horizontalFormRow_label text-bold textRight">
+						{{"Settings.KeyboardLanguage" | i18n}}
+					</label>
+					<div class="horizontalFormRow_field color-text-faded ml-500">
+						<dx-input-language-select is-open-book-exam="isOpenBookExam">
+						</dx-input-language-select>
+					</div>
+				</div>
+			</div>
+
+			<div class="horizontalFormRow">
+				<label class="horizontalFormRow_label text-bold textRight">
+					{{"Settings.AccessibilitySettings.Title" | i18n}}
+				</label>
+
+				<div
+						class="horizontalFormRow_field ml-500"
+						ng-show="changeAccessibilitySettingsSupported">
+					<p class="text-italic mb-200 color-text-faded">
+						{{"Settings.AccessibilitySettings.Info" | i18n}}
+					</p>
+
+					<button
+							dx-button="default"
+							ng-show="platform === 'CHROME_APP'"
+							ng-click="openFileDialog()">
+						{{"Settings.AccessibilitySettings.Button" | i18n}}
+					</button>
+				</div>
+
+				<div
+						class="horizontalFormRow_field ml-500"
+						ng-show="!changeAccessibilitySettingsSupported">
+					<p class="text-italic mb-200 color-text-faded">
+						{{"Settings.AccessibilitySettings.Unavailable" | i18n}}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button ng-show="textToSpeechEnabled || isWindows"
+				dx-button="default"
+				ng-click="cancel()">
+			{{"Settings.Cancel" | i18n}}
+		</button>
+		<button ng-show="textToSpeechEnabled || isWindows"
+				dx-button="cta"
+				ng-click="save()"
+				class="ml-400">
+			{{"Settings.Save" | i18n}}
+		</button>
+		<button ng-show="!textToSpeechEnabled && !isWindows"
+				dx-button="default"
+				ng-click="close()"
+				class="ml">
+			{{"Settings.Close" | i18n}}
+		</button>
+	</div>
+</div>

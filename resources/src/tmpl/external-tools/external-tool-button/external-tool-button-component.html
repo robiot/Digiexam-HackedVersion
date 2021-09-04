@@ -1,0 +1,12 @@
+<button 
+		class="externalToolButton iconButton appNoDraggable"
+		ng-class="{'externalToolButton-active': vm.isActive, 'externalToolButton-withName_container': vm.name && !vm.small}"
+		title="{{vm.name}}"
+		ng-disabled="vm.disabled">
+	<i
+			ng-class="{small: vm.small, dxFaDualTone: !vm.disabled}"
+			class="fad {{vm.iconClass}} fa-3x dxIcon dxFaDualTone"
+			aria-hidden="true">
+	</i>
+	<div ng-if="vm.name && !vm.small" class="externalToolButton_withName-label">{{vm.name}}</div>
+</button>

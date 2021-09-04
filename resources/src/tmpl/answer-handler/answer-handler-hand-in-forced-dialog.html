@@ -1,0 +1,86 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 ng-show="!isDemo" class="h1 mh-500">{{"Duration.HandedIn.Title" | i18n}}</h1>
+		<h1 ng-show="isDemo" class="h1 mh-500">{{"Duration.HandedIn.Demo.Title" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			<p class="mb">{{"Duration.HandedIn.Text0" | i18n}}</p>
+		</div>
+		<div ng-show="!isDemo">
+			<div ng-show="online" class="dialogSection">
+				<div class="dialogSection dialogSection_iconContainer">
+					<img class="dialogSection dialogSection_icon" src="images/check-circle.svg" />
+				</div>
+				<p class="dialogSection dialogSection_text">{{"Duration.HandedIn.Text1" | i18n}}</p>
+			</div>
+
+			<div ng-show="!online && !isIOS" class="dialogSection">
+				<div class="dialogSection dialogSection_iconContainer">
+					<img class="dialogSection dialogSection_icon" src="images/stop-circle.svg" />
+				</div>
+				<p class="dialogSection dialogSection_text">{{"Duration.HandInFailed" | i18n}}</p>
+			</div>
+
+			<div ng-show="!online && isIOS" class="dialogSection">
+				<div class="dialogSection dialogSection_iconContainer">
+					<img class="dialogSection dialogSection_icon" src="images/stop-circle.svg" />
+				</div>
+				<p class="dialogSection dialogSection_text">{{"Duration.HandInFailed.IOs" | i18n}}</p>
+			</div>
+		</div>
+		<div ng-show="isDemo">
+			<div ng-show="online" class="dialogSection">
+				<div class="dialogSection dialogSection_iconContainer">
+					<img class="dialogSection dialogSection_icon" src="images/check-circle.svg" />
+				</div>
+				<p class="dialogSection dialogSection_text">{{"Duration.HandedIn.DemoExam.Text0" | i18n}}</p>
+			</div>
+		</div>
+
+		<div ng-show="!isIOS && !isDemo" class="dialogSection">
+			<div class="dialogSection dialogSection_iconContainer">
+				<img class="dialogSection dialogSection_icon" src="images/usb-device.svg" />
+			</div>
+			<div class="dialogSection dialogSection_text">
+				<p>{{"Duration.HandedIn.Text3" | i18n}}</p>
+				<button dx-button="default"
+					ng-show="isChromeApp"
+					ng-click="openFileDialog()"
+					class="mt-400">
+					{{"Duration.SelectOfflineFile" | i18n}}
+				</button>
+			</div>
+		</div>
+		<div ng-show="isDemo" class="dialogSection">
+			<div class="dialogSection dialogSection_iconContainer">
+				<img class="dialogSection dialogSection_icon" src="images/usb-device.svg" />
+			</div>
+			<div class="dialogSection dialogSection_text">
+				<p>{{"Duration.HandedIn.DemoExam.Text1" | i18n}}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				ng-show="online"
+				ng-click="closeExamAfterHandIn()"
+				dx-button="cta">
+			{{"Duration.ExitApplication" | i18n}}
+		</button>
+		<button
+				ng-show="!online && isIOS"
+				ng-click="closeExamAfterHandIn()"
+				dx-button="cta">
+			{{"Duration.Ok" | i18n}}
+		</button>
+		<button
+				ng-show="!online && !isIOS"
+				ng-click="offlineHandIn()"
+				dx-button="cta">
+			{{"Duration.HandInOffline" | i18n}}
+		</button>
+	</div>
+</div>

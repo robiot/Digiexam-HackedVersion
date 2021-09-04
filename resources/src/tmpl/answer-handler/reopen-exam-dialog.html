@@ -1,0 +1,33 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 class="h1 mh-500">Reopen exam?</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="m-500">
+			Reopen the exam and:
+			<div class="ml-800 mt-300">
+				<dx-extended-time
+						action="extendedTimeAction"
+						extended-minutes="extendedMinutes"
+						enabled="durationEnabled">
+				</dx-extended-time>
+			</div>
+		</div>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				dx-dialog-autofocus
+				ng-click="cancel()"
+				dx-button="default"
+				class="mr-300">
+			Cancel
+		</button>
+		<button
+				ng-click="reopenExam()"
+				dx-button="cta">
+			Reopen exam
+		</button>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<div class="dialog dialog-higherPosition">
+	<div class="dialog_header">
+		<h1>{{ "StartDemoExam.Title" | i18n}}</h1>
+	</div>
+
+	<div class="dialog_body">
+		<div class="display-block text-center mb">
+			<img
+					src="images/demoExam_illustration.svg"
+					width="300" />
+		</div>
+		{{ "StartDemoExam.Text" | i18n}}
+	</div>
+
+	<div class="dialog_footer">
+		<button dx-button="default" class="pull-right" ng-click="close()">{{ "StartDemoExam.Cancel" | i18n}}</button>
+		<button dx-button="cta" class="pull-right" ng-click="confirm()">{{ "StartDemoExam.Confirm" | i18n}}</button>
+	</div>
+</div>

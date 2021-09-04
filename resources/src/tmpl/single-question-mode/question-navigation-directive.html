@@ -1,0 +1,25 @@
+<div class="questionNavigation">
+	<div
+			ng-repeat="question in vm.questions"
+			ng-click="vm.onClick($index)"
+			class="questionBox questionBox-default"
+			ng-class="{
+				'rtl': vm.dxActiveExam.getExam().rightToLeft,
+				'questionBox-selected': vm.activeView === $index,
+				'questionBox-hoverable': !vm.dxActiveExam.isLockedQuestionSequence() && vm.dxDetectPlatform() !== 'IOS_WEBVIEW',
+				'questionBox-clickable': !vm.dxActiveExam.isLockedQuestionSequence(),
+				'questionBox-answered': vm.isAnswered($index),
+			}">
+		<div class="bookmark">
+			<div ng-show="vm.isBookmarked($index)" class="bookmark_triangle bookmark_triangle-small"></div>
+		</div>
+
+		<p class="questionBox_title">{{question.title}}</p>
+
+		<p
+				ng-if="!vm.dxActiveExam.isLockedQuestionSequence() && question.about"
+				class="questionBox_about">
+			{{question.about}}
+		</p>
+	</div>
+</div>

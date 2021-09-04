@@ -1,0 +1,15 @@
+<div class="horizontalFormRow">
+	<label class="horizontalFormRow_label text-bold textRight">
+		{{"Volume.Title" | i18n}}
+	</label>
+	<div class="horizontalFormRow_field ml-500">
+		<img src="images/icon_volume.svg" width="30" class="mr-300" />
+		<dx-slider
+			marker="vm.volumeMarker"
+			on-change="vm.onVolumeSliderChange"
+			min="0"
+			max="100"
+			step="1" >
+		</dx-slider>
+	</div>
+</div>

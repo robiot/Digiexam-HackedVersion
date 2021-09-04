@@ -1,0 +1,145 @@
+<div class="dialog" id="mediaPermissionCheck">
+	<div ng-show="!isMediaDevicesSupported">
+		<div class="dialog_header">
+			<h1 class="h1">
+				{{"MediaPermissionCheck.NotSupported" | i18n}}
+			</h1>
+		</div>
+
+		<div class="dialog_body">
+			<p class="mb-300">
+				{{"MediaPermissionCheck.NotSupported.ProctorInfo" | i18n}}
+			</p>
+		</div>
+
+		<div class="dialog_footer">
+			<button
+					ng-click="cancelCheck()"
+					dx-button="default">
+				{{"MediaPermissionCheck.Close" | i18n}}
+			</button>
+		</div>
+	</div>
+
+	<div ng-show="isMediaDevicesSupported">
+		<div class="dialog_header">
+			<h1 class="h1">
+				{{"MediaPermissionCheck.EquipmentCheck" | i18n}}
+			</h1>
+		</div>
+
+		<div class="dialog_body mediaPermissionCheck_body">
+			<div class="ph-300 mediaPermissionCheck_column">
+				<p class="mb-300">
+					{{mediaPermissionInfo}}
+				</p>
+
+				<h4 class="h4 mb-300">
+					{{"MediaPermissionCheck.Equipment" | i18n}}
+				</h4>
+
+				<div ng-show="permissionsRequired.webcam">
+					<p ng-class="{'color-text-success': checkOutcome.webcamSuccess, 'color-text-error': !checkOutcome.webcamSuccess}">
+						{{"MediaPermissionCheck.EquipmentCheck.Camera" | i18n}}
+					</p>
+	
+					<div ng-show="!checkOutcome.webcamSuccess && permissionsRequired.webcam" class="mv-300">
+						<p>
+							{{"MediaPermissionCheck.EquipmentCheck.CameraError" | i18n}}
+						</p>
+	
+						<p class="mv-300">
+							<a href="{{mediaPermissionSupportUrl}}" dx-external-link>
+								{{"MediaPermissionCheck.EquipmentCheck.GoToHelp" | i18n}}
+							</a>
+						</p>
+	
+						<button dx-button="default" ng-click="checkWebcam()">
+							{{"MediaPermissionCheck.EquipmentCheck.TryAgain" | i18n}}
+						</button>
+					</div>
+				</div>
+
+				<div ng-show="permissionsRequired.microphone">
+					<p ng-class="{'color-text-success': checkOutcome.microphoneSuccess, 'color-text-error': !checkOutcome.microphoneSuccess}">
+						{{"MediaPermissionCheck.EquipmentCheck.Microphone" | i18n}}
+					</p>
+	
+					<div ng-show="!checkOutcome.microphoneSuccess" class="mv-300">
+						<p>
+							{{"MediaPermissionCheck.EquipmentCheck.MicrophoneError" | i18n}}
+						</p>
+	
+						<p class="mv-300">
+							<a href="{{mediaPermissionSupportUrl}}" dx-external-link>
+								{{"MediaPermissionCheck.EquipmentCheck.GoToHelp" | i18n}}
+							</a>
+						</p>
+	
+						<button dx-button="default" ng-click="checkMicrophone()">
+							{{"MediaPermissionCheck.EquipmentCheck.TryAgain" | i18n}}
+						</button>
+					</div>
+				</div>
+
+				<div ng-show="permissionsRequired.screenShare">
+					<p ng-class="{'color-text-success': checkOutcome.screenShareSuccess, 'color-text-error': !checkOutcome.screenShareSuccess}">
+						{{"MediaPermissionCheck.EquipmentCheck.ScreenRecording" | i18n}}
+					</p>
+	
+					<div ng-show="!checkOutcome.screenShareSuccess" class="mv-300">
+						<p>
+							{{"MediaPermissionCheck.EquipmentCheck.ScreenRecordingError" | i18n}}
+						</p>
+	
+						<p class="mv-300">
+							<a href="{{mediaPermissionSupportUrl}}" dx-external-link>
+								{{"MediaPermissionCheck.EquipmentCheck.GoToHelp" | i18n}}
+							</a>
+						</p>
+	
+						<button dx-button="default" ng-click="checkScreenShare()">
+							{{"MediaPermissionCheck.EquipmentCheck.TryAgain" | i18n}}
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="ph-300 mediaPermissionCheck_column">
+				<div ng-if="permissionsRequired.webcam">
+					<h4 class="h4 mb-300">
+						{{"MediaPermissionCheck.CameraPreview" | i18n}}
+					</h4>
+	
+					<div id="videoContainer" class="mediaPermissionCheck_videoPreviewContainer"></div>
+				</div>
+
+				<div ng-if="permissionsRequired.screenShare">
+					<h4 class="h4 mb-300 mt-300">
+						{{"MediaPermissionCheck.ScreenPreview" | i18n}}
+					</h4>
+	
+					<div id="screenShareContainer" class="mediaPermissionCheck_videoPreviewContainer"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="dialog_footer">
+			<button
+					ng-click="cancelCheck()"
+					dx-button="default"
+					class="mr-300">
+				{{"StartExam.Confirm.Cancel" | i18n}}
+			</button>
+
+			<button
+					dx-button="cta"
+					ng-click="proceedToExam()"
+					ng-disabled="(permissionsRequired.webcam && !checkOutcome.webcamSuccess) || 
+						(permissionsRequired.microphone && !checkOutcome.microphoneSuccess) || 
+						(permissionsRequired.screenShare && !checkOutcome.screenShareSuccess)">
+				{{"MediaPermissionCheck.Continue" | i18n}}
+			</button>
+		</div>
+	</div>
+</div>

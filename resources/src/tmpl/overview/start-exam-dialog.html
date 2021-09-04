@@ -1,0 +1,16 @@
+<div class="dialog dialog-higherPosition">
+	<div class="dialog_header">
+		<h1>{{ "StartExam.Confirm.Title" | i18n}} <span class="bold">{{ examTitle }}</span></h1>
+	</div>
+
+	<div class="dialog_body">
+        <p>{{ "StartExam.Confirm.Text0" | i18n}}</p>
+        <p ng-if="!isOpenBook && !isChromeApp" class="colorFaded mt">{{ "StartExam.Confirm.Text1.Lockdown" | i18n}}</p>
+        <p ng-if="isOpenBook && !isChromeApp" class="colorFaded mt">{{ "StartExam.Confirm.Text1.OpenBook" | i18n}}</p>
+	</div>
+
+	<div class="dialog_footer">
+		<button dx-button="default" class="" ng-click="cancel()">{{ "StartExam.Confirm.Cancel" | i18n}}</button>
+		<button dx-button="cta" class="" ng-click="confirm()">{{ "StartExam.Confirm.StartExam0" | i18n}}</button>
+	</div>
+</div>

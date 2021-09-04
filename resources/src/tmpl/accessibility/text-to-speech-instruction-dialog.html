@@ -1,0 +1,21 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 class="h1">{{"TextToSpeech.Title" | i18n}}</h1>
+	</div>
+
+	<div ng-if="!isWindows" class="dialog_body">
+		<p class="mb mt">{{"TextToSpeech.Instructions.PlayIcon1" | i18n}}<img src="images/textToSpeech_icon_speaking.svg" class="verticalBottom"/>{{"TextToSpeech.Instructions.PlayIcon2" | i18n}}</p>
+		<p class="mb">{{"TextToSpeech.Instructions.HotKey1" | i18n}} <img src="images/textToSpeech_icon_alt_key.svg"/> + <img src="images/textToSpeech_icon_A_key.svg"/> {{"TextToSpeech.Instructions.HotKey2" | i18n}}</p>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				dx-dialog-autofocus
+				ng-disabled="disableButtons"
+				ng-click="close()"
+				dx-button="cta"
+				class="mr-300">
+			{{"TextToSpeech.OkButton" | i18n}}
+		</button>
+	</div>
+</div>

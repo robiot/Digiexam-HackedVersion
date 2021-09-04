@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-csp="">
+
+<head>
+	<title>DigiExam</title>
+	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- rev-hash -->
+<link rel="stylesheet" type="text/css" href="css/libs.min.css?v=67bab27e005ee7dd7fdbcbb54ed7c747" />
+<link rel="stylesheet" type="text/css" href="css/main.min.css?v=16dacf12933a6517a1d52f3df8067155" />
+<link rel="stylesheet" type="text/css" href="angular-build/styles.css?v=3a748430d61d35fedb190532ec4d0817"/>
+<script src="js/libs.min.js?v=2c01d888c0a519d7b780fea7a4ffedad" type="text/javascript"></script>
+<!-- end -->
+</head>
+
+<body layout="column" dx-set-platform-class dx-prevent-keyboard-history-navigation style="overflow: hidden;">
+	<dx-top-menu></dx-top-menu>
+
+	<dx-notification-center class="notificationCenter"></dx-notification-center>
+
+	<dx-online-resources-webview id="online-resources-container" ng-if="dxDetectPlatform() !== 'IOS_WEBVIEW'"></dx-online-resources-webview>
+	<div id="external-tool-webview-container"></div>
+
+	<div flex layout-relative ng-view class="mainContent"></div>
+
+	<div class="debug-area" ng-controller="DebugController">
+		<div ng-if="dxDetectPlatform() === 'CHROME_APP'">
+			<button class="debug-area-trigger" ng-dblclick="toggleDebugMessages()" tabindex="-1"></button>
+
+			<div id="debug-messages-area" class="debug-messages-area" ng-show="showMessages">
+				<div class="clearfix">
+					<div ng-repeat="f in dxrFiles" class="debug-message mb-300">
+						{{f.name}}
+						<button dx-button="border-default small" class="ml-300" ng-click="saveDXR(f)">Save</button>
+					</div>
+
+					<button dx-button="default" ng-click="readDXRFiles()">Load DXR file list</button>
+				</div>
+
+				<div ng-if="messages.length" class="clearfix">
+					<hr class="mv" />
+
+					<div ng-repeat="m in messages">
+						<span class="debug-message" ng-class="{'debug-message-type-critical': m.type == 0}">{{m.message}}</span>
+					</div>
+
+					<button dx-button="default" ng-click="clear()">Clear messages</button>
+				</div>
+
+				<button dx-button="default" class="debug-close" ng-click="toggleDebugMessages()">Close</button>
+			</div>
+		</div>
+	</div>
+	<embed dx-pb src="pb/pb.nmf" type="application/x-pnacl" width="0" height="0" />
+	<!-- rev-hash -->
+<script src="js/main.min.js?v=d37a9d85166971c0967cd9abcc744f9f" type="text/javascript"></script>
+<script src="angular-build/runtime.js?v=ba4ce49e7b167eb2b3bb004bf39272a6"></script>
+<script src="angular-build/polyfills.js?v=ba617189893f73ff7e8c46f809de9126"></script>
+<script src="angular-build/vendor.js?v=69dfecc33dd70dcad32ac04f77eb72d5"></script>
+<script src="angular-build/main.js?v=8405fe51d093a8d09ebf82437021429a"></script>
+<!-- end -->
+</body>
+
+</html>

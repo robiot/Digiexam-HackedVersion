@@ -1,0 +1,29 @@
+<div class="dialog">
+	<div class="dialog_header">
+		<h1 class="h1">
+			{{"HandInConfirm.Title0" | i18n}}
+		</h1>
+	</div>
+
+	<div class="dialog_body">
+		<p class="mb-300">{{"HandInComfirm.Text0" | i18n}}</p>
+		<p>{{"HandInComfirm.Text1" | i18n}}</p>
+	</div>
+
+	<div class="dialog_footer">
+		<button
+				dx-dialog-autofocus
+				ng-click="rejectCallback()"
+				dx-button="default"
+				class="mr-300"
+				ng-disabled="disabled">
+			{{"HandInConfirm.Cancel" | i18n}}
+		</button>
+		<button
+				ng-click="acceptCallback()"
+				dx-button="default"
+				ng-disabled="disabled">
+			{{"HandInConfirm.Button" | i18n}}
+		</button>
+	</div>
+</div>

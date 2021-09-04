@@ -1,0 +1,28 @@
+{
+  "name": "DigiExam",
+  "productName": "DigiExam",
+  "version": "13.0.3",
+  "main": "main.js",
+  "author": "DigiExam Solutions Sweden AB",
+  "description": "Digital assessment platform",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "drivelist": "7.0.3",
+    "diskusage": "1.1.3",
+    "dx-asus-touchpad-fix": "./modules/dx-asus-touchpad-fix",
+    "dx-drive-reader": "./modules/dx-drive-reader",
+    "dx-elevated": "./modules/dx-elevated",
+    "dx-lang": "./modules/dx-lang",
+    "dx-sec": "./modules/dx-sec",
+    "dx-speech": "./modules/dx-speech",
+    "dx-user-defaults": "./modules/dx-user-defaults",
+    "electron-json-storage": "4.2.0",
+    "electron-updater": "4.3.5",
+    "spellchecker": "github:DigiExam/node-spellchecker#master",
+    "forcefocus": "1.1.0",
+    "glob": "7.1.6",
+    "compare-versions": "3.6.0"
+  },
+  "windowsUpdateUrl": "https://storage.googleapis.com/digiexam/clients/win"
+}
