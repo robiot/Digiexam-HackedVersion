@@ -30,7 +30,10 @@ It allows you to:
 You successfully installed it if it says "Hacked version" in the bottom when starting it.
 
 \
-I don't recommend you to cheat since that is not good, I just made this for educational purposes.\
-*I take no responsibility for what you do with this.*
+If you want to read about how I did this, check out [This post](https://medium.com/@rwcx0x/digiexam-is-not-cheat-proof-and-here-is-why-2b2d0146a55e)
+```
+I don't recommend you to cheat since that is not good, I just made this for educational purposes.
+I take no responsibility for what you do with this.
 
-```The images, resources & everything is owned by DigiExam Solutions Sweden AB```
+The images, resources & everything is owned by DigiExam Solutions Sweden AB
+```
