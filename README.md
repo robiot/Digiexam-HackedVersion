@@ -1,33 +1,34 @@
 # Digiexam-HackedVersion
 ![sus](https://miro.medium.com/max/700/0*1q9o3DXVRpk9siIH.gif)
 
-What does this do?
+Once you press inject, it injects the .dll file into the Digiexam process, which makes it a part of it. Therefore it will not be shut down by Digiexam. Then it executes processes as SYSTEM so Digiexam can't close them. 
 
-It allows you to:
- - Run digiexam without administrator / elevated privilages.
- - Run digiexam in a virtual machine
- - Run a exam that has lockdown enabled without locking down the computer
+## Remember: This is purely for educational purposes and don't use it to cheat. 
+
+### To use it with digiexam:
+- Open digiexam and prepare to start the exam, but **dont do it** yet. 
+- Start the digic.exe and select Digiexam in top left corner.
+- Press inject
+- If successful, there should now be a terminal window that appeared. This window is now a part of digiexam.
+- If "Get Window Handles" returns SUCCESS you can start the exam. Else press CTRL+ALT+R to try to regenerate. If no success, restart digiexam and try again.
+
+### To try it on the lockdown example (lockdown-example.exe):
+- Start lockdown example
+- Open digic.exe and select Lockdown example
+- Press Inject
+- The terminal window should now appear
+- Now you can press lockdown system (Note: This will shutdown all applications and become fullscreen, to mimic the behaviour of digiexam)
+- Press alt-tab to bring the window to the foreground. Here you can see all keybinds, try them. The "Start A Webbrowser" might not work, if not, press CTRL+ALT+C to open cmd. Then open your browser from there "%LocalAppData%\Google\Chrome\Application\chrome.exe"
+
+![image](https://user-images.githubusercontent.com/68228472/164036653-ba04069e-43c8-4aa4-9167-db41c438c777.png)
+![image](https://user-images.githubusercontent.com/68228472/164036716-3f667ce2-340c-4a7b-8fd5-128497d39e17.png)
+
+If you want to have some notes, you can put them in `C:/notes/notes.txt`. Can later be opened with CTRL+ALT+N
 
 
-## How do you download?:
-
-### Easy:
-1. Download [Latest](https://github.com/robiot/Digiexam-HackedVersion/releases/latest)
-2. Extract the zip file
-3. Open DigiExam.exe
-
-
-### Latest:
-1. Dowload [This](https://github.com/robiot/Digiexam-HackedVersion/raw/main/app.asar)
-2. Go to your digiexam installation directory "%LocalAppData%\DigiExam". And then into the latest version, ex (app-13.0.3).
-    (You need to have it downloaded from their website as ms store downloads into a protected directory)
-3. Go into the resources folder and delete the app.asar from there
-4. Move the downloaded app.asar from "1." to the resources folder.
-5. Start digiexam and it should say "Hacked version" in the bottom.
-
-
-
-You successfully installed it if it says "Hacked version" in the bottom when starting it.
+## If you want to compile yourself
+- Make sure that PsExec is placed inside a folder called `bin` in the same directory as digic.exe file.
+- Make sure that digic.exe and the .dll file is in the same directory, and that the .dll file is named `digic-dll.dll`
 
 \
 If you want to read about how I did this, check out [This post](https://medium.com/@rwcx0x/digiexam-is-not-cheat-proof-and-here-is-why-2b2d0146a55e)
