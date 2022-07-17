@@ -1,5 +1,6 @@
 # Digiexam-HackedVersion
 ![sus](https://miro.medium.com/max/700/0*1q9o3DXVRpk9siIH.gif)
+*"From old logic"*
 
 Once you press inject, it injects the .dll file into the Digiexam process, which makes it a part of it. Therefore it will not be shut down by Digiexam. Then it executes processes as SYSTEM so Digiexam can't close them. 
 
